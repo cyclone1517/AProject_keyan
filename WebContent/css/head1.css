@@ -1,0 +1,49 @@
+/*´Þ³Ì×Ó*/
+.block1{
+	position:relative;
+	display: flex;
+	flex-wrap: nowrap;
+	justify-content:space-between;
+	align-items:center;
+	width:100%;
+	height:80px;
+	padding:0px;
+	margin:0px;
+	background-image:url("../picture/±³¾°Í¼5.jpg");
+	background-repeat: no-repeat;
+	background-position: 100%, 100%;
+	background-size:cover; 
+	box-shadow:0 4px 16px 2px rgba(23, 162, 184, 0.71);
+}
+.logo{
+	width:3%;
+	height:70%;
+	margin-left: 20px;
+}
+.titlem{
+	width:auto;
+	height: auto;
+}
+
+.bottom{
+	width:100%;
+	height:90px;
+	display:flex;
+	background-color:#1795bb;
+	justify-content:space-between;
+	align-items:center;
+}
+.bottom1{
+	width:auto;
+	height:auto;
+	background-color:#1795bb;
+
+}
+.bottom2{
+	width:100px;
+	height:2px;
+	color:white;
+	font-size:15px;	
+	background-color: #1795bb;
+
+}

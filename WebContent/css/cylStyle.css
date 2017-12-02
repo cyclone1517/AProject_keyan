@@ -1,0 +1,28 @@
+.cyl_titile{
+	width:100%;
+	font-size:23px;
+	font-family:Microsoft Yahei;
+	text-align:center;
+	color:#2c366f;
+	padding-top:30px;
+	background-color: rgb(231, 244, 241);
+
+}
+
+.liukongTotal{
+	display:flex;
+	width:84%;
+	margin:0 auto;
+	margin-top:40px;
+	margin-bottom:40px;
+	height:550px;
+	background-color: rgb(231, 244, 241);
+	border:1px solid #bbb;
+}
+
+.liukong{
+	display:flex;
+	width:100%;
+	height:655px;
+	background-color: rgb(231, 244, 241);
+}
