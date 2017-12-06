@@ -2,7 +2,7 @@ package Bean;
 
 import java.util.Date;
 
-public class Works {
+public class WorksBean {
 	String Wrk_no;
 	String Tch_no;
 	int state; /* 创建，待审核，已审核，禁用 */

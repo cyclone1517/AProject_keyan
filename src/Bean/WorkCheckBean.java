@@ -2,12 +2,28 @@ package Bean;
 
 import java.util.Date;
 
-//成果审核表
-public class WorkCheck {
-	String Wrk_no;//成果编号
-	String Mng_no;//管理员编号
-	Date operTime;//操作时间
-	int oper_no;//操作编号
+public class WorkCheckBean {
+	String Wrk_no;// 成果编号
+	String Tch_no;
+	int state; /* 创建，待审核，已审核，禁用 */
+	String Mng_no;// 管理员编号
+	Date operTime;// 操作时间
+	int oper_no;// 操作编号
+	public String getTch_no() {
+		return Tch_no;
+	}
+
+	public void setTch_no(String tch_no) {
+		Tch_no = tch_no;
+	}
+
+	public int getState() {
+		return state;
+	}
+
+	public void setState(int state) {
+		this.state = state;
+	}
 
 	public String getWrk_no() {
 		return Wrk_no;
