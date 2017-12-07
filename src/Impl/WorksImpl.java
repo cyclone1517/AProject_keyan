@@ -14,6 +14,7 @@ import Bean.WorksBean;
 import Dao.TeacherDao;
 import Dao.WorksDao;
 import Util.Util;
+import columnXML.CreatXML;
 
 public class WorksImpl implements WorksDao {
 
@@ -43,7 +44,8 @@ public class WorksImpl implements WorksDao {
 			}finally{
 				util.closeConnection(conn);
 			}
-		
+			String state1=String.valueOf(work.getState());
+			new CreatXML().addWorElement(work.getTch_no(),work.getWrk_no(),state1);
 	}
 	@Override
 	public void delwork(String Tch_no, String Wrk_no, int state) {

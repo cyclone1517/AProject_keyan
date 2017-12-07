@@ -3,7 +3,12 @@
 <rss version="2.0"> 
   <teacher tid="201526010308"> 
     <work wid="1" state="1"> 
-      <column cid="1"></column> 
+      <column cid="1">科研成果展示系统成果一Nullam hendrerit justo non leo aliquet imperdiet. Etiam in sagittis lectus. Suspendisse ultrices placerat accumsan. Mauris quis dapibus orci. In dapibus velit blandit pharetra tincidunt. Quisque non sapien nec lacus condimentum facilisis ut iaculis enim. Sed viverra interdum bibendum. Donec ac sollicitudin dolor. Sed fringilla vitae lacus at rutrum. Phasellus congue vestibulum ligula sed consequat.</column> 
+    </work> 
+  </teacher>  
+  <teacher tid="201526010307"> 
+    <work wid="1" state="1"> 
+      <column cid="1">展示系统成果一Nullam hendrerit justo non leo aliquet imperdiet. Etiam in sagittis lectus. Suspendisse ultrices placerat accumsan. Mauris quis dapibus orci. In dapibus velit blandit pharetra tincidunt. Quisque non sapien nec lacus condimentum facilisis ut iaculis enim. Sed viverra interdum bibendum. Donec ac sollicitudin dolor. Sed fringilla vitae lacus at rutrum. Phasellus congue vestibulum ligula sed consequat.</column> 
     </work> 
   </teacher> 
 </rss>

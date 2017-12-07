@@ -137,7 +137,7 @@ public class CreatXML {
 		 Document document = reader.read(new File("WorkColumn.xml"));
 		 Node node = document.selectSingleNode("//teacher[@tid="+teaid+"]/work[@wid="+worid+" and @state="+state+"]/column[@cid="+colid+"]"); 
 		 node.setText(content);
-		//指定文件输出的位置
+		 	//指定文件输出的位置
 	        FileOutputStream out =new FileOutputStream("WorkColumn.xml");
 	        // 指定文本的写出的格式：
 	        OutputFormat format=OutputFormat.createPrettyPrint();   //漂亮格式：有空格换行
@@ -159,11 +159,11 @@ public class CreatXML {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		//new CreatXML().createXML();
-		//new CreatXML().addTeaElement("201526010308");
-		//new CreatXML().addWorElement("201526010308","1","1");
-		//new CreatXML().addColElement("201526010308","1","1","1");
-		String content="科研成果展示系统成果一Nullam hendrerit justo non leo aliquet imperdiet. Etiam in sagittis lectus. Suspendisse ultrices placerat accumsan. Mauris quis dapibus orci. In dapibus velit blandit pharetra tincidunt. Quisque non sapien nec lacus condimentum facilisis ut iaculis enim. Sed viverra interdum bibendum. Donec ac sollicitudin dolor. Sed fringilla vitae lacus at rutrum. Phasellus congue vestibulum ligula sed consequat.";
-		new CreatXML().addColContent("201526010308","1","1","1",content);
+		//new CreatXML().addTeaElement("201526010307");
+		//new CreatXML().addWorElement("201526010307","1","1");
+		//new CreatXML().addColElement("201526010307","1","1","1");
+		String content="展示系统成果一Nullam hendrerit justo non leo aliquet imperdiet. Etiam in sagittis lectus. Suspendisse ultrices placerat accumsan. Mauris quis dapibus orci. In dapibus velit blandit pharetra tincidunt. Quisque non sapien nec lacus condimentum facilisis ut iaculis enim. Sed viverra interdum bibendum. Donec ac sollicitudin dolor. Sed fringilla vitae lacus at rutrum. Phasellus congue vestibulum ligula sed consequat.";
+		new CreatXML().addColContent("201526010307","1","1","1",content);
 	}
 
 }
