@@ -12,6 +12,7 @@ import com.mysql.jdbc.Statement;
 import Bean.TeacherBean;
 import Dao.TeacherDao;
 import Util.Util;
+import columnXML.CreatXML;
 
 public class TeacherImpl implements TeacherDao {
 
@@ -70,6 +71,8 @@ public class TeacherImpl implements TeacherDao {
 		}finally{
 			util.closeConnection(conn);
 		}
+		
+		new CreatXML().addTeaElement(teacher.getTch_no());
 	}
 	
 
