@@ -158,15 +158,15 @@
 		<div class="liukongTotal">
 			<div id="Navigation">
 			<ul>
-				<li><a href="个人信息分离.html" target="rightFrame">基本信息</a></li>
-				<li><a href="修改密码分离.html" target="rightFrame">修改密码</a></li>
-				<li><a href="邮箱绑定分离.html" target="rightFrame">邮箱绑定</a></li>
+				<li><a href="subIndivCenter/IndivInfo.jsp" target="rightFrame">基本信息</a></li>
+				<li><a href="subIndivCenter/PswdChange.jsp" target="rightFrame">修改密码</a></li>
+				<li><a href="subIndivCenter/EmailSaving.jsp" target="rightFrame">邮箱绑定</a></li>
 				<li><a href="个人成果.html" target="_self">返回主页</a></li>
 				<li id="space"> </li>
 			</ul>
 			</div>
 			<div class="myframe">
-				<iframe name="rightFrame" width="100%" height="100%" src="个人信息分离.html" frameborder="0" scrolling="no"></iframe>
+				<iframe name="rightFrame" width="100%" height="100%" src="subIndivCenter/IndivInfo.jsp" frameborder="0" scrolling="no"></iframe>
 			</div>
 		</div>
 	</div>
