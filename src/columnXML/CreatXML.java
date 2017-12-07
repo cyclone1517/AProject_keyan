@@ -57,6 +57,7 @@ public class CreatXML {
         format.setEncoding("UTF-8");
         //1.创建写出对象
         XMLWriter writer=new XMLWriter(out,format);
+        writer.setEscapeText(false);
         //2.写出Document对象
 		writer.write(document);
         //3.关闭流
@@ -89,6 +90,7 @@ public class CreatXML {
 	        format.setEncoding("UTF-8");
 	        //1.创建写出对象
 	        XMLWriter writer=new XMLWriter(out,format);
+	        writer.setEscapeText(false);
 	        //2.写出Document对象
 			writer.write(document);			
 	        //3.关闭流
@@ -144,6 +146,7 @@ public class CreatXML {
 	        format.setEncoding("UTF-8");
 	        //1.创建写出对象
 	        XMLWriter writer=new XMLWriter(out,format);
+	        writer.setEscapeText(false);
 	        //2.写出Document对象
 			writer.write(document);	
 	        //3.关闭流
@@ -161,9 +164,9 @@ public class CreatXML {
 		//new CreatXML().createXML();
 		//new CreatXML().addTeaElement("201526010307");
 		//new CreatXML().addWorElement("201526010307","1","1");
-		//new CreatXML().addColElement("201526010307","1","1","1");
-		String content="展示系统成果一Nullam hendrerit justo non leo aliquet imperdiet. Etiam in sagittis lectus. Suspendisse ultrices placerat accumsan. Mauris quis dapibus orci. In dapibus velit blandit pharetra tincidunt. Quisque non sapien nec lacus condimentum facilisis ut iaculis enim. Sed viverra interdum bibendum. Donec ac sollicitudin dolor. Sed fringilla vitae lacus at rutrum. Phasellus congue vestibulum ligula sed consequat.";
-		new CreatXML().addColContent("201526010307","1","1","1",content);
+		//new CreatXML().addColElement("201526010307","1","1","2");
+		String content="展示系统成果一”“吃的擦<sdas>-=kNullam hendrerit justo non leo aliquet imperdiet. Etiam in sagittis lectus. Suspendisse ultrices placerat accumsan. Mauris quis dapibus orci. In dapibus velit blandit pharetra tincidunt. Quisque non sapien nec lacus condimentum facilisis ut iaculis enim. Sed viverra interdum bibendum. Donec ac sollicitudin dolor. Sed fringilla vitae lacus at rutrum. Phasellus congue vestibulum ligula sed consequat.";
+		new CreatXML().addColContent("201526010307","1","1","2",content);
 	}
 
 }
