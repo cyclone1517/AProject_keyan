@@ -157,7 +157,7 @@
 	
 		<p class="cyl_titile">基本信息</p>
 		<div id="cyl_basicInfo">
-		
+			<form action="Servlet/IndivInfo_Servlet" ,method = "post">
 			<table>
 				<tr>
 					<td width=90px>工&ensp;&ensp;号</td>
@@ -174,20 +174,21 @@
 				<tr>
 					<td>职&ensp;&ensp;称</td>
 					<td><select>
-						<option value="教授">教授</option>
-						<option value="教授">副教授</option>
-						<option value="教授">助理教授</option>
+						<option value="title">教授</option>
+						<option value="title">副教授</option>
+						<option value="title">助理教授</option>
 					</select></td>
 				</tr>
 				<tr><td><br/></td></tr>
 			</table>
+			</form>
 		</div>
 		
 		<br/><br/><br/>
 		
 		
 		<div style="margin-left:450px">
-			<input type="submit"/>
+			<input type="submit" value="submit"/>
 		</div>
 	</div>
 </div>
