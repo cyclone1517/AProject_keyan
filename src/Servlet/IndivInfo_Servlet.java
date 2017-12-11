@@ -12,26 +12,30 @@ import javax.servlet.http.HttpSession;
 import Bean.ManagerBean;
 import Bean.TeacherBean;
 import Dao.ManagerDao;
-import Dao.RoleOfUserDao;
 import Dao.TeacherDao;
 import Impl.ManagerImpl;
-import Impl.RoleOfUserImpl;
 import Impl.TeacherImpl;
 
 public class IndivInfo_Servlet extends HttpServlet{
+	private String action;
+	private TeacherDao tdao = new TeacherImpl();
+	
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		doGet(req,resp);
 	}
 	
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		resp.setContentType("text/html;charset=urf-8");
 		String action=req.getParameter("action");
-		if(action.equals("submit")){
-			syslist(req,resp);
+		if(req.getParameter("action")!=null)
+		{
+			this.action = req.getParameter("action");
+			if(action.equals("submit"))
+			{
+				changeUserInfo(req,resp);
+			}
 		}
-		else if(action.equals("get")){
-			
-		}
-		else if(action.equals("query")){
+		/*else if(action.equals("query")){
 			String type1 = new String(req.getParameter("type1").getBytes("iso-8859-1"), "utf-8");
 			String type2 = new String(req.getParameter("type2").getBytes("iso-8859-1"), "utf-8");
 			String keywords = new String(req.getParameter("keywords").getBytes("iso-8859-1"), "utf-8");
@@ -39,9 +43,18 @@ public class IndivInfo_Servlet extends HttpServlet{
 			session.setAttribute("type1", type1);
 			session.setAttribute("type2", type2);
 			session.setAttribute("keywords", keywords);
-		}
+		}*/
 	}
 	
+	protected void changeUserInfo(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		String title = req.getParameter("title");
+		String dpmt = req.getParameter("dpmt");
+		String no = req.getParameter("no");
+		TeacherDao tdao=new TeacherImpl();
+		TeacherBean tbean = new TeacherBean();
+		tbean.setTitle(title);
+		tdao.updateTeacher(tbean);
+	}
 	protected void listqueryname(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		TeacherDao dao1=new TeacherImpl();
 		String keywords=req.getParameter("keywords");

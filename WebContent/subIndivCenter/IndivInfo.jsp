@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="Bean.TeacherBean" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -157,39 +158,48 @@
 	
 		<p class="cyl_titile">基本信息</p>
 		<div id="cyl_basicInfo">
-			<form action="Servlet/IndivInfo_Servlet" ,method = "post">
+			<%
+				/*TeacherBean tbean = null;
+				if(request.getSession().getAttribute("tech")!=null){
+					tbean = (TeacherBean)session.getAttribute("tech");
+				}*/
+			%>
+			<form method = "post", action="/AProject_keyan/IndivInfo_Servlet?action=submit">
 			<table>
 				<tr>
 					<td width=90px>工&ensp;&ensp;号</td>
-					<td><input type="text" name="emain" id="cyl_emain" value="5678XXXX" style="width:280px" disabled></td>
+					<td><input type="text" name="no" id="cyl_emain" value="123456<%/*=tbean.getTch_no()*/%>" style="width:280px" disabled></td>
 				</tr>
 				<tr>
 					<td>姓&ensp;&ensp;名</td>
-					<td><input type="text" name="emain" id="cyl_emain" value="张三" style="width:280px" disabled></td>
+					<td><input type="text" name="name" id="cyl_emain" value="张三<%/*=tbean.getTch_name()*/ %>" style="width:280px" disabled></td>
 				</tr>
 				<tr>
 					<td>学&ensp;&ensp;院</td>
-					<td><input type="text" name="emain" id="cyl_emain" value="信息院" style="width:280px" disabled></td>
+					<td><input type="text" name="dpmt" id="cyl_emain" value="信息院<%/*=tbean.getDpmt()*/%>" style="width:280px" disabled></td>
 				</tr>
 				<tr>
 					<td>职&ensp;&ensp;称</td>
-					<td><select>
-						<option value="title">教授</option>
-						<option value="title">副教授</option>
-						<option value="title">助理教授</option>
+					<td><select name="title">
+						<option value="教授" >教授</option>
+						<option value="副教授" >副教授</option>
+						<option value="助理教授" >助理教授</option>
+						<option value="其它" >其它</option>
 					</select></td>
 				</tr>
 				<tr><td><br/></td></tr>
 			</table>
+			<br/><br/><br/>
+			<div style="margin-left:450px">
+				<input type="submit" value="submit"/>
+			</div>
 			</form>
 		</div>
 		
-		<br/><br/><br/>
 		
 		
-		<div style="margin-left:450px">
-			<input type="submit" value="submit"/>
-		</div>
+		
+		
 	</div>
 </div>
 </body>
