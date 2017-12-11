@@ -10,4 +10,20 @@
     <welcome-file>default.jsp</welcome-file>
     <welcome-file>IndivCenter.jsp</welcome-file>
   </welcome-file-list>
+  <servlet>
+    <servlet-name>LoadServlet</servlet-name>
+    <servlet-class>Servlet.LoadServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>LoadServlet</servlet-name>
+    <url-pattern>/LoadServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>WorkServlet</servlet-name>
+    <servlet-class>Servlet.WorkServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>WorkServlet</servlet-name>
+    <url-pattern>/Servlet/WorkServlet</url-pattern>
+  </servlet-mapping>
 </web-app>

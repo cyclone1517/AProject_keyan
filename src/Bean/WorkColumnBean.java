@@ -1,7 +1,7 @@
 package Bean;
 
 public class WorkColumnBean {
-	String Col_no;
+	int Col_no;
 	String Wrk_no;
 	String Col_name;
 	String Col_content;
@@ -24,11 +24,11 @@ public class WorkColumnBean {
 		this.state = state;
 	}
 
-	public String getCol_no() {
+	public int getCol_no() {
 		return Col_no;
 	}
 
-	public void setCol_no(String col_no) {
+	public void setCol_no(int col_no) {
 		Col_no = col_no;
 	}
 

@@ -1,16 +1,25 @@
 package Bean;
 
 public class Video_imageBean {
-	String VI_no;
+	int VI_no;
 	String video;
 	String image;
+	//int state;
 
-	public String getVI_no() {
+	//public int getState() {
+		//return state;
+	//}
+
+	//public void setState(int state) {
+	//	this.state = state;
+	//}
+
+	public int getVI_no() {
 		return VI_no;
 	}
 
-	public void setVI_no(String vI_no) {
-		VI_no = vI_no;
+	public void setVI_no(int vI_no) {
+		this.VI_no = vI_no;
 	}
 
 	public String getVideo() {

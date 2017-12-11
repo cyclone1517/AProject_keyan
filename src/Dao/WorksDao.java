@@ -7,6 +7,7 @@ import Bean.WorksBean;
 
 public interface WorksDao {
 	public void addwork(WorksBean work);
+	public int getvi_id();
 	public void delwork(String Tch_no,String Wrk_no,int state);
 	//改变成果状态：创建，提交，审核，发表；修改的话为增加一个创建/提交的表，审核后替换全来的发表的表，这些表编号相同
 	//创建变提交

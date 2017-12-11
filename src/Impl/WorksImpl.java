@@ -24,6 +24,7 @@ public class WorksImpl implements WorksDao {
 		String sql="insert into Works (Wrk_no, Wrk_name,Tch_no,Type_ID,wlabel,intro,createTime) values (?,?,?,?,?,?,current_date())";
 		Util util=new Util();
 		Connection conn=util.openConnection();
+		int autoIncKeyFromApi = -1;
 		/*TeacherBean teacher=new TeacherBean();
 		TeacherDao td=new TeacherImpl();
 		teacher=td.get(work.getTch_no());
@@ -44,8 +45,8 @@ public class WorksImpl implements WorksDao {
 			}finally{
 				util.closeConnection(conn);
 			}
-			String state1=String.valueOf(work.getState());
-			new CreatXML().addWorElement(work.getTch_no(),work.getWrk_no(),state1);
+		//	String state1=String.valueOf(work.getState());
+		//	new CreatXML().addWorElement(work.getTch_no(),work.getWrk_no(),state1);
 	}
 	@Override
 	public void delwork(String Tch_no, String Wrk_no, int state) {
@@ -391,6 +392,28 @@ public class WorksImpl implements WorksDao {
 			util.closeConnection(conn);
 		}
 		return null;
+	}
+	@Override
+	public int getvi_id() {
+		// TODO Auto-generated method stub
+		String sql="select max(VI_no) from Works";
+		Util util=new Util();
+		Connection conn=util.openConnection();
+		try {
+			PreparedStatement pstmt=conn.prepareStatement(sql);
+			//pstmt.setString(1, id);
+			ResultSet rs=pstmt.executeQuery();
+			if(rs.next()){
+				int vino=rs.getInt("max(VI_no)");
+				return vino;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally{
+			util.closeConnection(conn);
+		}
+		return 0;
 	}
 
 

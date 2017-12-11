@@ -1,5 +1,13 @@
 package Dao;
 
-public interface Video_imageDao {
+import Bean.Video_imageBean;
 
+public interface Video_imageDao {
+	public void addvi(Video_imageBean vi);
+	public void addimg(String url,int id);
+	public void addvideo(String url,int id);
+	public void deletevi(int VI_no);
+	public void updatevi(Video_imageBean vi);
+	public Video_imageBean get(int VI_no);
+	
 }
