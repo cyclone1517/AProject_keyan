@@ -151,6 +151,11 @@
 			border:5px;
 		}
 	</style>
+<script type="text/javascript">
+	function surePsdChange(){
+		alert("您已成功修改密码!");
+	}
+</script>
 </head>
 <body background-color="rgb(231, 244, 241)">
 <div class="liukong">
@@ -158,30 +163,30 @@
 		<p class="cyl_titile">修改密码</p>
 		<div id="cyl_basicInfo">
 		
+			<form method = "post", action="/AProject_keyan/IndivCenter_Servlet?action=psdChange">
 			<table>
 				<tr>
 					<td width=90px>原密码</td>
-					<td><input type="password" name="emain" id="cyl_emain" style="width:300px"></td>
+					<td><input type="password" name="oldpsd" id="cyl_emain" style="width:300px"></td>
 				</tr>
 				<tr><td><br/></td></tr>
 				<tr>
 					<td>新密码</td>
-					<td><input type="password" name="emain" id="cyl_emain" style="width:300px"></td>
+					<td><input type="password" name="newpsd1" id="cyl_emain" style="width:300px"></td>
 				</tr>
 				<tr><td><br/></td></tr>
 				<tr>
 					<td>确认密码</td>
-					<td><input type="password" name="emain" id="cyl_emain" style="width:300px"></td>
+					<td><input type="password" name="newpsd2" id="cyl_emain" style="width:300px"></td>
 				</tr>
 				<tr><td><br/></td></tr>
 			</table>
-		</div>
-		
-		<br/><br/><br/>
-		
-		
-		<div style="margin-left:450px">
-			<a href="" target="_self"><input type="submit"/></a>
+			<br/><br/><br/>
+			<div style="margin-left:450px">
+				<input type="submit" onClick="surePsdChange()"/>
+			</div>
+			</form>
+			
 		</div>
 	</div>
 </div>

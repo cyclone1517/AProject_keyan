@@ -161,7 +161,7 @@
 				<li><a href="subIndivCenter/IndivInfo.jsp" target="rightFrame">基本信息</a></li>
 				<li><a href="subIndivCenter/PswdChange.jsp" target="rightFrame">修改密码</a></li>
 				<li><a href="subIndivCenter/EmailSaving.jsp" target="rightFrame">邮箱绑定</a></li>
-				<li><a href="个人成果.html" target="_self">返回主页</a></li>
+				<li><a href="SysControl.jsp" target="_self">返回主页</a></li>
 				<li id="space"> </li>
 			</ul>
 			</div>

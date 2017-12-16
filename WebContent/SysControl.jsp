@@ -106,9 +106,9 @@ function ccz_forbid(){
 			</button>
 			<ul class="dropdown-menu pull-right" role="menu" aria-labelledby="UserMenue1">
 				<li role="presentation">
-					<a role="menuitem" tabindex="-1" href="#">个人中心</a></li>
+					<a role="menuitem" tabindex="-1" href="IndivCenter.jsp">个人中心</a></li>
 				<li role="presentation">
-					<a role="menuitem" tabindex="-1" href="#">退出</a></li>
+					<a role="menuitem" tabindex="-1" href="Login.jsp">退出</a></li>
 				</ul>
 			</div>
 			

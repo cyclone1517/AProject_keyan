@@ -82,7 +82,7 @@ $(function(){
 			<input type="password" name="password" maxlength="16" id="" tabindex="2"/>
 		</div>
 		<div class="code">
-			<label>验证码：</label>
+			<label>验证码：</label>`
 			<input type="text" name="" maxlength="6" id="code" tabindex="3"/>
 			<div class="codeImg">
 				<img src="images/captcha.jpeg.jpg" />

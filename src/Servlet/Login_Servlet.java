@@ -49,9 +49,10 @@ public class Login_Servlet extends HttpServlet{
 			HttpSession session=req.getSession();
 			session.setAttribute("type1", "所有");
 			session.setAttribute("type2", "不限");
+			session.setAttribute("username", username); //save user info
 			//req.getRequestDispatcher("SysControl.jsp").forward(req, resp);
-			resp.sendRedirect("http://localhost:8080/AProject_keyan/SysControl.jsp");
-			//resp.sendRedirect("http://localhost:8888/AProject_keyan/SysControl.jsp");
+			//resp.sendRedirect("http://localhost:8080/AProject_keyan/SysControl.jsp");
+			resp.sendRedirect("http://localhost:8888/AProject_keyan/SysControl.jsp");
 			//syslist(req,resp);
 		}
 		else{

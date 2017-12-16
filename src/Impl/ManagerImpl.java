@@ -49,13 +49,13 @@ public class ManagerImpl implements ManagerDao {
 	@Override
 	public void addManager(ManagerBean manager) {
 		// TODO Auto-generated method stub
-		String sql="insert into Manager (Mng_no,Mng_name,password,email,dpmt) values (?,?,?,?,?)";//ĞŞ¸Äinsert
+		String sql="insert into Manager (Mng_no,Mng_name,password,email,dpmt) values (?,?,?,?,?)";//ï¿½Ş¸ï¿½insert
 		Util util=new Util();
 		Connection conn=util.openConnection();
 		try {
 			PreparedStatement ptmt=conn.prepareStatement(sql);
 			ptmt.setString(1, manager.getMng_no());
-			ptmt.setString(3, manager.getMng_no());//³õÊ¼ÃÜÂëºÍÓÃ»§±àºÅÏàÍ¬
+			ptmt.setString(3, manager.getMng_no());//ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¬
 			ptmt.setString(2, manager.getMng_name());
 			ptmt.setString(4, manager.getEmail());
 			ptmt.setString(5, manager.getDpmt());

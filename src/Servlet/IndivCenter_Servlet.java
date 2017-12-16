@@ -1,13 +1,13 @@
 package Servlet;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import Bean.ManagerBean;
 import Bean.TeacherBean;
@@ -16,9 +16,8 @@ import Dao.TeacherDao;
 import Impl.ManagerImpl;
 import Impl.TeacherImpl;
 
-public class IndivInfo_Servlet extends HttpServlet{
+public class IndivCenter_Servlet extends HttpServlet{
 	private String action;
-	private TeacherDao tdao = new TeacherImpl();
 	
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		doGet(req,resp);
@@ -32,7 +31,9 @@ public class IndivInfo_Servlet extends HttpServlet{
 			this.action = req.getParameter("action");
 			if(action.equals("submit"))
 			{
-				changeUserInfo(req,resp);
+				/*changeUserInfo(req,resp);*/
+			}else if(action.equals("psdChange")){
+				changePassword(req,resp);
 			}
 		}
 		/*else if(action.equals("query")){
@@ -46,6 +47,7 @@ public class IndivInfo_Servlet extends HttpServlet{
 		}*/
 	}
 	
+	/*这个函数没有用上*/
 	protected void changeUserInfo(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String title = req.getParameter("title");
 		String dpmt = req.getParameter("dpmt");
@@ -55,33 +57,43 @@ public class IndivInfo_Servlet extends HttpServlet{
 		tbean.setTitle(title);
 		tdao.updateTeacher(tbean);
 	}
-	protected void listqueryname(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		TeacherDao dao1=new TeacherImpl();
-		String keywords=req.getParameter("keywords");
-		List<TeacherBean> list1=dao1.queryName(keywords);
-		req.setAttribute("list1", list1);
-		
-		ManagerDao dao=new ManagerImpl();
-		List<ManagerBean> list=dao.queryIdname(1, keywords);
-		req.setAttribute("list", list);
-		List<ManagerBean> list2=dao.queryIdname(3, keywords);
-		req.setAttribute("list2", list2);
-		//System.out.println(list+"before");
-		req.getRequestDispatcher("SysControl.jsp").forward(req, resp);
-	}
 	
-	protected void tchlist(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		TeacherDao dao=new TeacherImpl();
-		List<TeacherBean> list=dao.query();
-		req.setAttribute("list1", list);
-		//System.out.println(list+"before");
-		req.getRequestDispatcher("SysControl.jsp").forward(req, resp);
+	protected void changePassword(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		ManagerDao mdao=new ManagerImpl();
+		ManagerBean mbean = new ManagerBean();
+		String username = (String)req.getSession().getAttribute("username");
+		mbean = mdao.get(username);
+		
+		String oldpsd = req.getParameter("oldpsd");
+		String newpsd1 = req.getParameter("newpsd1");
+		String newpsd2 = req.getParameter("newpsd2");
+		
+		PrintWriter out=resp.getWriter();
+		if(mbean.getPassword()!=oldpsd){
+			//out.print("<script language='javascript'>alert('原密码输入错误!');window.location.href='Login.jsp';</script>"); 
+			out.print("<script language='javascript'>alert('原密码输入错误!');</script>"); 
+			req.getRequestDispatcher("PswdChange.jsp").forward(req, resp);
+		}else if(newpsd1!=newpsd2){
+			out.print("<script language='javascript'>alert('重新输入的密码不一致!');</script>"); 
+			req.getRequestDispatcher("PswdChange.jsp").forward(req, resp);
+		}else{
+			mbean.setPassword(newpsd2);
+			mdao.updateManager(mbean);
+			out.print("<script language='javascript'>alert('您已成功修改密码!');</script>"); 
+			req.getRequestDispatcher("PswdChange.jsp").forward(req, resp);
+		}
+		
+		
+		
+		
+		
+		
 	}
 	
 	protected void tchqueryno(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		TeacherDao dao=new TeacherImpl();
 		String keywords=req.getParameter("keywords");
-		List<TeacherBean> list=dao.queryId(keywords);
+		List<TeacherBean> list=dao.queryId(0, keywords);
 		req.setAttribute("list1", list);
 		//System.out.println(list+"before");
 		req.getRequestDispatcher("SysControl.jsp").forward(req, resp);
