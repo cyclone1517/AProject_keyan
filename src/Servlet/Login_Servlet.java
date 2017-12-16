@@ -47,14 +47,15 @@ public class Login_Servlet extends HttpServlet{
 		Manager=dao.login(username, password);
 		if(Manager!=null){
 			HttpSession session=req.getSession();
-			session.setAttribute("type1", "ËùÓĞ");
-			session.setAttribute("type2", "²»ÏŞ");
+			session.setAttribute("type1", "æ‰€æœ‰");
+			session.setAttribute("type2", "ä¸é™");
 			//req.getRequestDispatcher("SysControl.jsp").forward(req, resp);
 			resp.sendRedirect("http://localhost:8080/AProject_keyan/SysControl.jsp");
+			//resp.sendRedirect("http://localhost:8888/AProject_keyan/SysControl.jsp");
 			//syslist(req,resp);
 		}
 		else{
-			req.getRequestDispatcher("demo.jsp").forward(req, resp);
+			req.getRequestDispatcher("Login.jsp").forward(req, resp);
 		}
 	}
 }

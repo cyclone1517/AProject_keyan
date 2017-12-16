@@ -67,7 +67,26 @@
      }
  }
   </script>
-
+<script  type="text/javascript">
+function ccz_forbid(){
+	var x=document.getElementById("yewu");
+	var y=document.getElementById("xitong");
+	var z=document.getElementById("teacher");
+	if(z.checked)
+	{
+		document.getElementById("duty").disabled = false;
+	}
+	else{
+	if(x.checked ||y.checked){
+		document.getElementById("duty").disabled = true;
+	}
+	else
+	{
+		document.getElementById("duty").disabled = false;
+	}
+}
+}
+  </script>
 </head>
 <body>
 	<div id="ccz_yewuguanli">
@@ -105,7 +124,7 @@
 					<a href="#shoudong" data-toggle="tab" style="font-size: 18px"><b>手动导入</b></a>
 				</li>
 				<li >
-					<a href="#xitong" data-toggle="tab" style="font-size: 18px"><b>系统导入</b></a>
+					<a href="#xitong1" data-toggle="tab" style="font-size: 18px"><b>系统导入</b></a>
 				</li>
 				</ul>
 				</li>
@@ -156,8 +175,8 @@
 			if(request.getAttribute("list")!=null){
 				List<ManagerBean> list=(List<ManagerBean>) request.getAttribute("list"); 
 				for(ManagerBean mng:list){
-					String dpmt=new String(mng.getDpmt().getBytes("iso-8859-1"), "GB2312");
-					String name=new String(mng.getMng_name().getBytes("iso-8859-1"), "GB2312");
+					String dpmt=mng.getDpmt();//new String(mng.getDpmt().getBytes("iso-8859-1"), "gbk");
+					String name=mng.getMng_name();//new String(mng.getMng_name().getBytes("iso-8859-1"), "gbk");
 					RoleOfUserDao dao=new RoleOfUserImpl();
 			%>
 			<tr>
@@ -165,7 +184,7 @@
 			<td><%=name %></td>
 			<td><%List<String> str=dao.queryUserno(mng.getMng_no()) ;
 			for(String ss:str){
-			String s=new String(ss.getBytes("iso-8859-1"), "GB2312");%>
+			String s=ss;//new String(ss.getBytes("iso-8859-1"), "GB2312");%>
 			<%=s %>
 			<%} %></td>
 			<td><%=dpmt %></td>
@@ -179,8 +198,8 @@
 			if(request.getAttribute("list1")!=null){
 				List<TeacherBean> list=(List<TeacherBean>) request.getAttribute("list1"); 
 				for(TeacherBean mng:list){
-					String dpmt=new String(mng.getDpmt().getBytes("iso-8859-1"), "GB2312");
-					String name=new String(mng.getTch_name().getBytes("iso-8859-1"), "GB2312");
+					String dpmt=mng.getDpmt();//new String(mng.getDpmt().getBytes("iso-8859-1"), "gbk");
+					String name=mng.getTch_name();//new String(mng.getTch_name().getBytes("iso-8859-1"), "gbk");
 					RoleOfUserDao dao=new RoleOfUserImpl();
 			%>
 			<tr>
@@ -188,12 +207,12 @@
 			<td><%=name %></td>
 			<td><%List<String> str=dao.queryUserno(mng.getTch_no()) ;
 			for(String ss:str){
-			String s=new String(ss.getBytes("iso-8859-1"), "GB2312");%>
+			String s=ss;//new String(ss.getBytes("iso-8859-1"), "GB2312");%>
 			<%=s %>
 			<%} %></td>
 			<td><%=dpmt %></td>
 			<td><%=mng.getEmail() %></td>
-			<td><a href="http://localhost:8080/AProject_keyan/Mng_Servlet?action=get&ide=tch&id=<%=mng.getTch_no()%>">修改</a></td>
+			<td><a href="http://localhost:8080/AProject_keyan/Mng_Servlet?action=get&ide=sys&id=<%=mng.getTch_no()%>">修改</a></td>
 			<td><a href="http://localhost:8080/AProject_keyan/Mng_Servlet?action=delete&ide=tch&id=<%=mng.getTch_no() %>">删除</a></td>
 			</tr>
 			<%} }%>
@@ -202,8 +221,8 @@
 			if(request.getAttribute("list2")!=null){
 				List<ManagerBean> list=(List<ManagerBean>) request.getAttribute("list2"); 
 				for(ManagerBean mng:list){
-					String dpmt=new String(mng.getDpmt().getBytes("iso-8859-1"), "GB2312");
-					String name=new String(mng.getMng_name().getBytes("iso-8859-1"), "GB2312");
+					String dpmt=mng.getDpmt();//new String(mng.getDpmt().getBytes("iso-8859-1"), "gbk");
+					String name=mng.getMng_name();//new String(mng.getMng_name().getBytes("iso-8859-1"), "gbk");
 					RoleOfUserDao dao=new RoleOfUserImpl();
 			%>
 			<tr>
@@ -211,12 +230,12 @@
 			<td><%=name %></td>
 			<td><%List<String> str=dao.queryUserno(mng.getMng_no()) ;
 			for(String ss:str){
-			String s=new String(ss.getBytes("iso-8859-1"), "GB2312");%>
+			String s=ss;//new String(ss.getBytes("iso-8859-1"), "GB2312");%>
 			<%=s %>
 			<%} %></td>
 			<td><%=dpmt %></td>
 			<td><%=mng.getEmail() %></td>
-			<td><a href="http://localhost:8080/AProject_keyan/Mng_Servlet?action=get&ide=bus&id=<%=mng.getMng_no()%>">修改</a></td>
+			<td><a href="http://localhost:8080/AProject_keyan/Mng_Servlet?action=get&ide=sys&id=<%=mng.getMng_no()%>">修改</a></td>
 			<td><a href="http://localhost:8080/AProject_keyan/Mng_Servlet?action=delete&ide=bus&id=<%=mng.getMng_no() %>">删除</a></td>
 			</tr>
 			<%}} %>
@@ -246,49 +265,45 @@
 				<p class=cyl_titile>新增用户</p>
 				<p style="font-weight:bold">基本信息</p>
 				<div class="cyl_basicInfo1">
-				
+					<form name="f1" action="/AProject_keyan/Mng_Servlet?action=add&ide=sys" method="post">
 					<table>
 						<tr>
 							<td width=90px>职工号</td>
-							<td><input type="text" name="emain" id="cyl_emain" style="width:300px"></td>
+							<td><input type="text" name="no" id="cyl_emain" style="width:300px"></td>
 						</tr>
 						<tr><td><br/></td></tr>
 						<tr>
 							<td>用户身份</td>
 							<td>
-							    <from>
-							        <input type="checkbox" name="checkbox1" value="教师">教师&nbsp&nbsp&nbsp&nbsp
-							        <input type="checkbox" name="checkbox2" value="业务管理员">业务管理员&nbsp&nbsp&nbsp&nbsp
-							        <input type="checkbox" name="checkbox3" value="系统管理员">系统管理员
-							    </from>
+							        <input type="checkbox" name="tch" value="教师" id="teacher" onchange="ccz_forbid()">教师&nbsp&nbsp&nbsp&nbsp
+							        <input type="checkbox" name="bus" value="业务管理员" id="yewu" onchange="ccz_forbid()">业务管理员&nbsp&nbsp&nbsp&nbsp
+							        <input type="checkbox" name="sys" value="系统管理员" id="xitong" onchange="ccz_forbid()">系统管理员
 							</td>
 						</tr>
 						<tr><td><br/></td></tr>
 						<tr>
 						 <td>姓名</td>
-						 <td><input type="text" name="emain" id="cyl_emain" style="width:300px"></td>
+						 <td><input type="text" name="name" id="cyl_emain" style="width:300px"></td>
 						</tr>
 						<tr><td><br/></td></tr>
 						<tr>
 						 <td>邮箱</td>
-						 <td><input type="text" name="emain" id="cyl_emain" style="width:300px"></td>
+						 <td><input type="text" name="email" id="cyl_emain" style="width:300px"></td>
 						</tr>
 						<tr><td><br/></td></tr>
 						<tr>
 						 <td>院系</td>
-						 <td><input type="text" name="emain" id="cyl_emain" style="width:300px"></td>
+						 <td><input type="text" name="dpmt" id="cyl_emain" style="width:300px"></td>
 						</tr>
 						<tr><td><br/></td></tr>
 						<tr>
 						 <td>职称</td>
 						 <td >
-						   <from>
-						     <select style="width:150px">
+						     <select style="width:150px" name="job" id="duty">
 		                         <option value="教授">教授</option>
 		                         <option value="副教授">副教授</option>
 		                         <option value="助理教授">助理教授</option>
 		                     </select>
-						   </from>
 						 </td>
 						</tr>
 					</table>
@@ -297,9 +312,10 @@
 				<br/><br/><br/>
 				
 				
-				<div style="margin-left:480px">
-					<input type="submit"/>
+				<div style="text-align:center">
+					<input type="submit" value="提交"/>
 				</div>
+				</form>
 			</div>
 		</div>
 
@@ -308,18 +324,29 @@
 				</div>
 	</div>
 
-      		<div class="tab-pane fade " id="xitong">
+      		<div class="tab-pane fade " id="xitong1">
 				<div class="block2">
 
 				<div class=cyl_codeUI>
 				<p class=cyl_titile>新增用户</p>
 				<div class="cyl_basicInfo3">
-				
+				<form method="post" action="/AProject_keyan/Excel_Servlet?type=excToMqsql" enctype="multipart/form-data" name="f">
 					<table>
+					   <tr>
+					      <td>用户类型</td>
+					      <td>
+					        <select name="identity">
+		                      <option value="tch">教师</option>
+		                      <option value="bus">业务管理员</option>
+		                      <option value="sys">系统管理员</option>
+		                   </select>
+		                   </td>
+		                 </tr>
+		                 <tr><td><br/></td></tr>
 						<tr>
 							<td width=90px>文件导入</td>
-							<td><input type="text" name="emain" id="cyl_emain" style="width:300px"></td>
-							<td><input type="submit" value="Browse..."></td>
+							<td><input type="file" name="file" id="cyl_emain" style="width:300px"></td>
+							<!--<td><input type="submit" value="Browse..."></td>-->
 						</tr>
 						<tr><td><br/></td></tr>
 					</table>
@@ -327,17 +354,18 @@
 				
 				<br/><br/><br/>
 				
+				<div style="margin-left:480px;padding-bottom:80px">
+					<input type="submit" value="提交"/>
+				</div>
+				
+				</form>
 				
 				
 			</div>
 		</div>
 
 	</div>
-				<div class="block2-1">
-				<div style="margin-left:480px;padding-bottom:80px">
-					<input type="submit"/>
-				</div>
-				</div>
+			<div class="block2-1"></div>	
 	</div>
 
 </div>

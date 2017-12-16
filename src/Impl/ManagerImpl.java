@@ -16,7 +16,7 @@ public class ManagerImpl implements ManagerDao {
 	@Override
 	public ManagerBean login(String userno, String password) {
 		// TODO Auto-generated method stub
-		String sql="select * from Manager where Mng_no=? and password=?";
+		String sql="select a.* from Manager a,roleofuser b,role c where a.Mng_no=? and a.password=? and a.Mng_no=b.User_no and b.role_no=c.role_no and c.role_no=1";
 		Util util=new Util();
 		Connection conn=util.openConnection();
 		try {
@@ -49,13 +49,17 @@ public class ManagerImpl implements ManagerDao {
 	@Override
 	public void addManager(ManagerBean manager) {
 		// TODO Auto-generated method stub
-		String sql="insert into Manager (Mng_no,password) values (?,?)";
+		String sql="insert into Manager (Mng_no,Mng_name,password,email,dpmt) values (?,?,?,?,?)";//修改insert
 		Util util=new Util();
 		Connection conn=util.openConnection();
 		try {
 			PreparedStatement ptmt=conn.prepareStatement(sql);
 			ptmt.setString(1, manager.getMng_no());
-			ptmt.setString(2, manager.getMng_no());//初始密码和用户编号相同
+			ptmt.setString(3, manager.getMng_no());//初始密码和用户编号相同
+			ptmt.setString(2, manager.getMng_name());
+			ptmt.setString(4, manager.getEmail());
+			ptmt.setString(5, manager.getDpmt());
+			//System.out.println("managerimpl 62:"+manager.getDpmt());
 			//ptmt.setInt(3, manager.getIdentity());
 			ptmt.executeUpdate();
 		} catch (SQLException e) {
@@ -69,14 +73,14 @@ public class ManagerImpl implements ManagerDao {
 	@Override
 	public void updateManager(ManagerBean manager) {
 		// TODO Auto-generated method stub
-		String sql ="update Manager set Mng_name=?,dpmt=? where Mng_no=?";
+		String sql ="update Manager set dpmt=? where Mng_no=?";
 		Util util=new Util();
 		Connection conn=util.openConnection();
 		try {
 			PreparedStatement ptmt=conn.prepareStatement(sql);
-			ptmt.setString(1, manager.getMng_name());
-			ptmt.setString(2,manager.getDpmt());
-			ptmt.setString(3, manager.getMng_no());
+			//ptmt.setString(1, manager.getMng_name());
+			ptmt.setString(1,manager.getDpmt());
+			ptmt.setString(2, manager.getMng_no());
 			ptmt.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -110,7 +114,7 @@ public class ManagerImpl implements ManagerDao {
 		// TODO Auto-generated method stub
 		Util util=new Util();
 		Connection conn=util.openConnection();
-		String sql="select * from Manager";
+		String sql="select * from Manager where Mng_no in(select User_no from roleofuser)";
 		List<ManagerBean> managers=new ArrayList<ManagerBean>();
 		try {
 			PreparedStatement ptmt=conn.prepareStatement(sql);
@@ -173,7 +177,7 @@ public class ManagerImpl implements ManagerDao {
 		// TODO Auto-generated method stub
 		Util util=new Util();
 		Connection conn=util.openConnection();
-		String sql="select * from Manager where Mng_no like ?";
+		String sql="select * from Manager where Mng_no like ? and Mng_no in(select User_no from roleofuser)";
 		List<ManagerBean> managers=new ArrayList<ManagerBean>();
 		try {
 			PreparedStatement ptmt=conn.prepareStatement(sql);
@@ -205,7 +209,7 @@ public class ManagerImpl implements ManagerDao {
 		// TODO Auto-generated method stub
 		Util util=new Util();
 		Connection conn=util.openConnection();
-		String sql="select * from Manager where dpmt like ?";
+		String sql="select * from Manager where dpmt like ? and Mng_no in(select User_no from roleofuser)";
 		List<ManagerBean> managers=new ArrayList<ManagerBean>();
 		try {
 			PreparedStatement ptmt=conn.prepareStatement(sql);
@@ -237,7 +241,7 @@ public class ManagerImpl implements ManagerDao {
 		// TODO Auto-generated method stub
 		Util util=new Util();
 		Connection conn=util.openConnection();
-		String sql="select * from Manager where Mng_name like ?";
+		String sql="select * from Manager where Mng_name like ? and Mng_no in(select User_no from roleofuser)";
 		List<ManagerBean> managers=new ArrayList<ManagerBean>();
 		try {
 			PreparedStatement ptmt=conn.prepareStatement(sql);
@@ -275,10 +279,13 @@ public class ManagerImpl implements ManagerDao {
 			pstmt.setString(1, id);
 			ResultSet rs=pstmt.executeQuery();
 			if(rs.next()){
-				String name=rs.getString(2);
-				ManagerBean bean=new ManagerBean();
-				bean.setMng_name(name);
-				return bean;
+				ManagerBean mb=new ManagerBean();
+				mb.setEmail(rs.getString("email"));
+				mb.setMng_no(rs.getString("Mng_no"));
+				mb.setMng_name(rs.getString("Mng_name"));
+				mb.setPassword(rs.getString("password"));
+				mb.setDpmt(rs.getString("dpmt"));
+				return mb;
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -326,7 +333,7 @@ public class ManagerImpl implements ManagerDao {
 		// TODO Auto-generated method stub
 		Util util=new Util();
 		Connection conn=util.openConnection();
-		String sql="select a.* from Manager a,RoleOfUser b where a.Mng_no=b.User_no and b.role_no=? and a.dpmp like ?";
+		String sql="select a.* from Manager a,RoleOfUser b where a.Mng_no=b.User_no and b.role_no=? and a.dpmt like ?";
 		List<ManagerBean> managers=new ArrayList<ManagerBean>();
 		try {
 			PreparedStatement ptmt=conn.prepareStatement(sql);

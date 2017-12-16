@@ -80,7 +80,7 @@ public class LoadServlet extends HttpServlet {
 	}
 	
 	protected void uploadImg(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
-		//´ÓrequestÖĞ»ñÈ¡ÁùĞÅÏ¢
+		//ä»requestä¸­è·å–å…­ä¿¡æ¯
 		request.setCharacterEncoding("UTF-8");  
         response.setContentType("text/html;charset=UTF-8"); 
 		Date now = new Date();  
@@ -105,18 +105,18 @@ public class LoadServlet extends HttpServlet {
         }  
         SmartUpload su = new SmartUpload();
 		su.initialize(getServletConfig(), request, response);
-		// ÉèÖÃ×î´óÎÄ¼ş´óĞ¡
+		// è®¾ç½®æœ€å¤§æ–‡ä»¶å¤§å°
 		su.setMaxFileSize(1024 * 1024 * 3);
 		su.setAllowedFilesList("jpg,png,gif");
-		String result = "ÉÏ´«³É¹¦";
+		String result = "ä¸Šä¼ æˆåŠŸ";
 		try {
 			su.upload();
-			String ext = su.getFiles().getFile(0).getFileExt() ;    //È¡µÃÎÄ¼şµÄÀ©Õ¹Ãû
+			String ext = su.getFiles().getFile(0).getFileExt() ;    //å–å¾—æ–‡ä»¶çš„æ‰©å±•å
 			su.getFiles().getFile(0).saveAs(storeDirectoryPath+idimg+"."+ext) ;
 			//su.save(storeDirectoryPath);
 		} catch (SmartUploadException e) {
 			// TODO Auto-generated catch block
-			result = "ÉÏ´«Ê§°Ü";
+			result = "ä¸Šä¼ å¤±è´¥";
 			e.printStackTrace();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -126,13 +126,13 @@ public class LoadServlet extends HttpServlet {
 		//response.sendRedirect("workedit/videoedit.jsp");
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
-		//out.println("ÉÏ´«³É¹¦"+idimg1);
+		//out.println("ä¸Šä¼ æˆåŠŸ"+idimg1);
 		//request.setAttribute("viID", idimg);
 		//request.getRequestDispatcher("/workedit/videoedit.jsp").forward(request, response);
 	}
 	
 	protected void uploadVideo(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
-		//´ÓrequestÖĞ»ñÈ¡ÁùĞÅÏ¢
+		//ä»requestä¸­è·å–å…­ä¿¡æ¯
 		request.setCharacterEncoding("UTF-8");  
         response.setContentType("text/html;charset=UTF-8"); 
 		Date now = new Date();  
@@ -152,18 +152,18 @@ public class LoadServlet extends HttpServlet {
         }  
         SmartUpload su = new SmartUpload();
 		su.initialize(getServletConfig(), request, response);
-		// ÉèÖÃ×î´óÎÄ¼ş´óĞ¡
+		// è®¾ç½®æœ€å¤§æ–‡ä»¶å¤§å°
 		su.setMaxFileSize(1024 * 1024 * 1024);
 		su.setAllowedFilesList("avi,rmvb,rm,asf,divx,mpg,mpeg,mpe,wmv,mp4,mkv,vob");
-		String result = "ÉÏ´«³É¹¦";
+		String result = "ä¸Šä¼ æˆåŠŸ";
 		try {
 			su.upload();
-			String ext = su.getFiles().getFile(0).getFileExt() ;    //È¡µÃÎÄ¼şµÄÀ©Õ¹Ãû
-			//String name = su.getRequest().getParameter("name") ;//Í¨¹ıSmartUploadÈ¡µÃname²ÎÊıµÄÖµ
+			String ext = su.getFiles().getFile(0).getFileExt() ;    //å–å¾—æ–‡ä»¶çš„æ‰©å±•å
+			//String name = su.getRequest().getParameter("name") ;//é€šè¿‡SmartUploadå–å¾—nameå‚æ•°çš„å€¼
 			su.getFiles().getFile(0).saveAs(storeDirectoryPath+idvd+"."+ext) ;
 		} catch (SmartUploadException e) {
 			// TODO Auto-generated catch block
-			result = "ÉÏ´«Ê§°Ü";
+			result = "ä¸Šä¼ å¤±è´¥";
 			e.printStackTrace();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -187,6 +187,6 @@ public class LoadServlet extends HttpServlet {
 		response.sendRedirect("workedit/coledit.jsp");
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
-		out.println("ÉÏ´«³É¹¦"+colname);
+		out.println("ä¸Šä¼ æˆåŠŸ"+colname);
 	}
 }

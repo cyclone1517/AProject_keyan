@@ -4,13 +4,17 @@ import java.util.List;
 import Bean.TeacherBean;
 
 public interface TeacherDao {
-	public TeacherBean login(String userno,String password);//Í¨¹ıÓÃ»§±àºÅºÍÃÜÂëµÇÂ¼
-	public void addTeacher(TeacherBean teacher);//Ìí¼Ó½ÌÊ¦
-	public void updateTeacher(TeacherBean teacher);//¸üĞÂ½ÌÊ¦
-	public void delTeac(String teacherno);//É¾³ı½ÌÊ¦
-	public List<TeacherBean> query();//²éÕÒËùÓĞ½ÌÊ¦
-	public List<TeacherBean> queryId(String id);//¸ù¾İID²éÕÒ½ÌÊ¦
-	public List<TeacherBean> queryDpmt(String dpmt);//¸ù¾İÑ§Ôº²éÕÒ½ÌÊ¦
-	public List<TeacherBean> queryName(String name);//¸ù¾İĞÕÃû²éÕÒ½ÌÊ¦
+	public TeacherBean login(String userno,String password);//é€šè¿‡ç”¨æˆ·ç¼–å·å’Œå¯†ç ç™»å½•
+	public void addTeacher(TeacherBean teacher);//æ·»åŠ æ•™å¸ˆ
+	public void updateTeacher(TeacherBean teacher);//æ›´æ–°æ•™å¸ˆ
+	public void delTeac(String teacherno);//åˆ é™¤æ•™å¸ˆ
+	public List<TeacherBean> query(int id);//æŸ¥æ‰¾æ‰€æœ‰æ•™å¸ˆ
+	public List<TeacherBean> query1(int id);//æŸ¥æ‰¾æ‰€æœ‰æ•™å¸ˆ
+	public List<TeacherBean> queryId(int no,String id);//æ ¹æ®IDæŸ¥æ‰¾æ•™å¸ˆ
+	public List<TeacherBean> queryId1(int no,String id);//æ ¹æ®IDæŸ¥æ‰¾æ•™å¸ˆ
+	public List<TeacherBean> queryDpmt(int no,String dpmt);//æ ¹æ®å­¦é™¢æŸ¥æ‰¾æ•™å¸ˆ
+	public List<TeacherBean> queryDpmt1(int no,String dpmt);//æ ¹æ®å­¦é™¢æŸ¥æ‰¾æ•™å¸ˆ
+	public List<TeacherBean> queryName(int no,String name);//æ ¹æ®å§“åæŸ¥æ‰¾æ•™å¸ˆ
+	public List<TeacherBean> queryName1(int no,String name);//æ ¹æ®å§“åæŸ¥æ‰¾æ•™å¸ˆ
 	public TeacherBean get(String id);
 }

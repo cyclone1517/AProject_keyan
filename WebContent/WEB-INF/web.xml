@@ -26,4 +26,34 @@
     <servlet-name>WorkServlet</servlet-name>
     <url-pattern>/Servlet/WorkServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>Excel_Servlet</display-name>
+    <servlet-name>Excel_Servlet</servlet-name>
+    <servlet-class>Servlet.Excel_Servlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Excel_Servlet</servlet-name>
+    <url-pattern>/Excel_Servlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>Login_Servlet</display-name>
+    <servlet-name>Login_Servlet</servlet-name>
+    <servlet-class>Servlet.Login_Servlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Login_Servlet</servlet-name>
+    <url-pattern>/Login_Servlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>Mng_Servlet</display-name>
+    <servlet-name>Mng_Servlet</servlet-name>
+    <servlet-class>Servlet.Mng_Servlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Mng_Servlet</servlet-name>
+    <url-pattern>/Mng_Servlet</url-pattern>
+  </servlet-mapping>
 </web-app>
