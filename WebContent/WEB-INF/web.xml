@@ -56,4 +56,14 @@
     <servlet-name>Mng_Servlet</servlet-name>
     <url-pattern>/Mng_Servlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>IndivCenter_Servlet</display-name>
+    <servlet-name>IndivCenter_Servlet</servlet-name>
+    <servlet-class>Servlet.IndivCenter_Servlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>IndivCenter_Servlet</servlet-name>
+    <url-pattern>/IndivCenter_Servlet</url-pattern>
+  </servlet-mapping>
 </web-app>
