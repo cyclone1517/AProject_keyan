@@ -166,37 +166,40 @@
 		.cyl_entry a{
 			text-decoration:none;
 		}
+		#panel{
+		display:none;
+		}
 	</style>
-	<script type="text/javascript">
-	function update() {
-	    //获取模态框数据
-	    var colname = $('#colname').val();
-	    $.ajax({
-	        type: "post",
-	        url: "../LoadServlet?wid=1&tid=201526010307&state=1",
-	        data: "colname="+colname,
-	        dataType: 'html', 
-	        success: function(msg){
-                $.messager.alert('信息','增加成功');
-        }
-	    });
+<script>
+	$(document).ready(function() {
+		$("#addbtn").click(function() {
+			$("#panel").slideToggle("slow");
+		});
+	});
+	function load()
+	{
+	<%
+	response.addHeader("P3P", "CP=CAO PSA OUR");
+	%>
 	}
-	
-	
-	</script>
+</script>
 </head>
-<body style="background-color:rgb(231, 244, 241)">
+<body style="background-color:rgb(231, 244, 241)"  onload="load()">
 		<div class="liukong">
-		<div class=cyl_codeUI style="margin-top:50px">
+		<div class=cyl_codeUI style="margin-top:50px">	
+			<button type="submit" id="addbtn" class="btn btn-primary btn-lg" style="margin-left: 90%;margin-top:5px;height:25px;width:70px;padding-bottom:20px;margin-bottom:10px;text-align: center;font-size:12px;padding-top:5px;padding-left:12px" ><a href="#" style="color:white">添加栏目</a></button>
+			<div id="panel" style="padding-top:10px;margin-bottom:20px">
+			<form action="../LoadServlet?action=addcol&ide=col&tid=201526010307&state=0" method="post">
+			<input type="text" id="colname" placeholder="请输入栏目名称" name="colname"  style="margin-left:30%"/>
+				<a href="../LoadServlet?action=addcol&ide=col&tid=201526010307&state=0">
+				<input type="submit" value="提交">
+				</input></a>
+			</form>
+			
+			</div>
 			<form>
 			<table class="table table-hover"style="text-align: center">
-			
 			<thead class="thead-dark" style="background-color:#337ab7;color:white;text-align: center">
-			<tr>
-			<th colspan="7" style="text-align: right;background-color:rgb(231, 244, 241)">
-			  <button type="submit" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#addCol" style="margin-left: 55%;margin-top:5px;height:25px;width:70px;padding: auto;text-align: center;font-size:12px;padding-top:5px;padding-left:12px" ><a href="#" style="color:white">添加用户</a></button>
-			</th>
-			</tr>
 			<tr>
 			<th colspan="5" style="text-align: center">栏目</th>
 			<th colspan="2" style="text-align: center">栏目编辑</th>
@@ -207,93 +210,38 @@
 			<%
 			List<WorkColumnBean>wcbs=new ArrayList<WorkColumnBean>();
 			WorkColumnDao wcd=new WorkColumnImpl();
-			
-			//wcbs=wcd.queryTC("201526010307", "1", 1);
-			wcbs=wcd.queryTC("201526010307","1",0);
+			wcbs=wcd.queryTC(session.getAttribute("tid").toString(),Integer.parseInt(session.getAttribute("wid").toString()),0);
+		//	System.out.println(session.getAttribute("tid")+"%"+session.getAttribute("alwid")+"%"+session.getAttribute("alstate")+"%"+session.getAttribute("wid")+"%"+wcd.queryTC(session.getAttribute("tid").toString(),Integer.parseInt(session.getAttribute("alwid").toString()),1).size());
+			//if(wcbs.isEmpty()==false){
 			for(int i=0;i<wcbs.size();i++)
 			{
+			
 			%>
 			<%
 			WorkColumnBean wcb=wcbs.get(i);
+			System.out.println("第"+i+"个栏目"+"栏目名为"+"栏目号为："+wcb.getCol_no()+"work编号为："+wcb.getWrk_no());
 			%>
 			<tr>
 			<td colspan="5">
-			<%=wcb.getCol_name() %>
+			<a href="ColContent.jsp?colid=<%=wcb.getCol_no()%>"><%=wcb.getCol_name() %></a>
 			</td>
 			<td>
-			<a href="" onclick="return false;" data-toggle='modal' data-target='#updateCol' style="text-decoration: none">修改</a>
-			<!-- <a href="" class="btn-lg" data-toggle="modal" data-toggle="#updateCol" style="margin-left: 55%;margin-top:5px;height:25px;width:70px;padding: auto;text-align: center;font-size:12px;padding-top:5px;padding-left:12px">修改</a> -->
+			<a href="updatename.jsp?colid=<%=wcb.getCol_no()%>&colname=<%= wcb.getCol_name()%>"  style="text-decoration: none">修改</a>
 			</td>
 			<td>
-			<a href="javascript:if(confirm('确定删除此用户?'))location='http://localhost:8088/Javaee_program/UserServlet?action=del';">删除</a>
+			<a href="javascript:if(confirm('确定删除此用户?'))location='../LoadServlet?action=delcol&ide=col&tid=201526010307&state=0&colid=<%=wcb.getCol_no()%>';">删除</a>
 			</td>
 			</tr>
 			<%
 			}
+			//}
 			%>
 			</tbody>
 			</table>
 			
 		<div style="text-align:right">
-			<a href="个人成果.html"><input type="submit"></input></a>
-		</div>
-	 	<div class="modal fade" id="addCol" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-							&times;
-						</button>
-					<h4 class="modal-title" id="myModalLabel">
-						新增栏目
-					</h4>
-					</div>
-				<div class="modal-body">
-				<form role="form" id="addform" method="post" action="../LoadServlet?action=addcol&ide=col&wid=1&tid=201526010307&state=1">
-					 <input type="text" value="${colname}" class="form-control" id="colname" placeholder="请输入栏目名称" name="colname">
-				
-					 </div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">关闭
-						</button>
-					<button type="submit" class="btn btn-primary" >
-						<a href="../LoadServlet?action=addcol&ide=col&wid=1&tid=201526010307&state=1">提交</a>
-					</button>
-				</div>
-				</form>
-				
-				</div>
-			</div><!--  /.modal --> 
-			</div> 
-		<div class="modal fade" id="updateCol" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-							&times;
-						</button>
-					<h4 class="modal-title" id="myModalLabel">
-						修改栏目
-					</h4>
-					</div>
-				<form method="post" action="../LoadServlet?wid=1&tid=201526010307&state=1">
-				<div class="modal-body">
-					 <input type="text" class="form-control" id="colalname" placeholder="请输入栏目名称">
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">关闭
-					</button>
-					<button type="button" class="btn btn-primary">
-						提交修改
-					</button>
-				</div>
-				</form>
-				</div>
-			</div><!-- /.modal 
-			</div>
-		
-		</form>
-		</div>
+			<a href="http://localhost:8088/MProject_keyan/Servlet/WorkServlet?action=saveall&ide=all&tid=201526010307"><input type="button" value="保存"></input></a>
+			<a href="http://localhost:8088/MProject_keyan/Servlet/WorkServlet?action=upall&ide=all"><input type="button" value="提交"></input></a>
 		</div>
 	
 </body>

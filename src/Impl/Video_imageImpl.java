@@ -68,7 +68,7 @@ public class Video_imageImpl implements Video_imageDao {
 	}
 
 	@Override
-	public void updatevi(Video_imageBean vi) {
+	public void updatevi(Video_imageBean vi,Video_imageBean vi1) {
 		// TODO Auto-generated method stub
 		String sql="update Video_image set video=?,image=? where VI_no=? ";
 		Util util=new Util();
@@ -77,8 +77,8 @@ public class Video_imageImpl implements Video_imageDao {
 				PreparedStatement ptmt=conn.prepareStatement(sql);
 				//ptmt.setInt(3, vi.getState());
 				ptmt.setInt(3, vi.getVI_no());//初始密码和用户编号相同
-				ptmt.setString(1, vi.getVideo());
-				ptmt.setString(2, vi.getImage());
+				ptmt.setString(1, vi1.getVideo());
+				ptmt.setString(2, vi1.getImage());
 				ptmt.executeUpdate();
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
@@ -89,32 +89,31 @@ public class Video_imageImpl implements Video_imageDao {
 	}
 	
 	@Override
-	public Video_imageBean get( int VI_no) {
+	public Video_imageBean get(int VIno) {
 		// TODO Auto-generated method stub
-		String sql="select * Video_image where VI_no=? ";
+		Video_imageBean vi=null;
 		Util util=new Util();
 		Connection conn=util.openConnection();
+		String sql="select * from Video_image where VI_no=? ";
 			try {
 				PreparedStatement ptmt=conn.prepareStatement(sql);
 				//ptmt.setInt(1, state);
-				ptmt.setInt(1, VI_no);//初始密码和用户编号相同
+				ptmt.setInt(1, VIno);//初始密码和用户编号相同
 				ResultSet rs=ptmt.executeQuery();
 				if(rs.next()){
-					Video_imageBean vi=new Video_imageBean();
+					vi=new Video_imageBean();
 					vi.setImage(rs.getString("image"));
 					//vi.setState(rs.getInt("state"));
 					vi.setVI_no(rs.getInt("VI_no"));
 					vi.setVideo(rs.getString("video"));
-					return vi;
 				}
-				ptmt.executeUpdate();
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}finally{
 				util.closeConnection(conn);
 			}
-			return null;
+			return vi;
 	}
 
 	@Override

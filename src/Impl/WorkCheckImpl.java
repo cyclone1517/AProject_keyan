@@ -20,7 +20,7 @@ public class WorkCheckImpl implements WorkCheckDao {
 		Connection conn=util.openConnection();
 			try {
 				PreparedStatement ptmt=conn.prepareStatement(sql);
-				ptmt.setString(1, work.getWrk_no());
+				ptmt.setInt(1, work.getWrk_no());
 				ptmt.setString(2, work.getTch_no());
 				ptmt.setInt(3, work.getState());
 				ptmt.setString(4, work.getMng_no());
@@ -35,7 +35,7 @@ public class WorkCheckImpl implements WorkCheckDao {
 	}
 
 	@Override
-	public void delwork(String Tch_no,String Wrk_no,int state,String Mng_no,Date operTime) {
+	public void delwork(String Tch_no,int Wrk_no,int state,String Mng_no,Date operTime) {
 		// TODO Auto-generated method stub
 		String sql="delete from WorkCheck where Tch_no=? and Wrk_no=? and state=? and Mng_no=? and operTime=?";
 		Util util=new Util();
@@ -43,7 +43,7 @@ public class WorkCheckImpl implements WorkCheckDao {
 		try {
 			PreparedStatement ptmt=conn.prepareStatement(sql);
 			ptmt.setString(1,Tch_no);
-			ptmt.setString(2,Wrk_no);
+			ptmt.setInt(2,Wrk_no);
 			ptmt.setInt(3,state);
 			ptmt.setString(4,Mng_no );
 			ptmt.setDate(5, operTime);
@@ -64,7 +64,7 @@ public class WorkCheckImpl implements WorkCheckDao {
 	}
 
 	@Override
-	public List<WorkCheckBean> query(String Tch_no, String Wrk_no, int state) {
+	public List<WorkCheckBean> query(String Tch_no, int Wrk_no, int state) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -88,9 +88,11 @@ public class WorkCheckImpl implements WorkCheckDao {
 	}
 
 	@Override
-	public WorkCheckBean get(String Tch_no, String Wrk_no, int state, String Mng_no, Date operTime) {
+	public WorkCheckBean get(String Tch_no, int Wrk_no, int state, String Mng_no, Date operTime) {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	
 
 }

@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=GB2312"
     pageEncoding="GB2312"%>
+<%@ page import="Bean.Video_imageBean" %>
+<%@ page import="Dao.Video_imageDao" %>
+<%@ page import="Impl.Video_imageImpl" %>
+<%@ page import="Util.ToStr" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -168,28 +172,47 @@
 	<div class=cyl_codeUI>
 		<div id="cyl_choosePic">
 			<p class="cyl_titile">视频介绍</p>
-			<!--  <input type="text" style="width:400px" value="(建议图片小于1M)"/>
-			<input type="button" value="选择路径"/><br/>
-			<div id="cyl_daiding">
-				<div style="text-align:center;line-height:300px"><p>请选择一个视频...</p></div>
-				<img src=""/ name=daidingPic/>
-			</div>-->
-			
+			<%
+				Video_imageBean vib1=new Video_imageBean();
+				String url=null;
+				Video_imageDao vid=new Video_imageImpl();
+				vib1=vid.get(Integer.parseInt(session.getAttribute("vid").toString()));
+				if(vib1.getVideo()!=null){
+					url=new ToStr().ToString(vib1.getVideo());
+				}
+				%>
 			<form action="../LoadServlet?action=upload&ide=video" enctype="multipart/form-data" method="post">
+			<%
+			   if(url!=null)
+				{
+				   
+				%>
                 请选择文件：<input id="myfile" name="myfile" type="file" onchange="previewImg(this)"/>
                 <br>
-                <button type="submit" class="btn" >提交</button>
-                <button type="reset" class="btn" onclick="nopreviewImg()">重置</button>
+                <!--  <button type="submit" class="btn" >提交</button>  -->           
+                <div id="cyl_daiding" style="margin-top:30px">
+              		默认文件：<%=url%>
+                </div>
+                <%
+				}else{
+				%>
+				 请选择文件：<input id="myfile" name="myfile" type="file" onchange="previewImg(this)"/>
                 <br>
+                <!--  <button type="submit" class="btn" >提交</button>  -->           
                 <div id="cyl_daiding" style="margin-top:30px">
                 </div>
-                
+                <% 
+				}				
+                %>
+                 <div style="height:50px"></div>
+                <div style="text-align:right">
+                    <button type="reset" class="btn" onclick="nopreviewImg()">重置</button>
+					<a href="../LoadServlet?action=upload&ide=video"><input type="submit" value="下一步"></input></a>
+				</div>
             </form>
 		</div>
 		<br/><br/>
-		<div style="text-align:right">
-			<a href="栏目设置分离.html"><input type="button" value="下一步"></input></a>
-		</div>
+		
 	</div>
 	<br/><br/>
 	

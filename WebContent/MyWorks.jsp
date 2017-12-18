@@ -1,5 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="Bean.WorksBean" %>
+<%@ page import="Dao.WorksDao" %>
+<%@ page import="Impl.WorksImpl" %>
+<%@ page import="org.apache.commons.lang3.StringUtils"%>
+<%@ page import="Bean.Video_imageBean" %>
+<%@ page import="Dao.Video_imageDao" %>
+<%@ page import="Impl.Video_imageImpl" %>
+<%@ page import="java.util.*" %>
+<%@ page import="Util.ToStr" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -50,7 +59,7 @@
 			<div class="title">
 					<h1 style="color: white">科研成果展示系统
 						<small style="color: white">版本号</small>
-					</h1><%=request.getAttribute("result") %>
+					</h1>
 			</div>
 			<div class="dropdown">
 			<button type="button" class="btn btn-primary btn-lg dropdown-toggle" id="UserMenue1" data-toggle="dropdown" style="margin-right: 20px;margin-top:35px;padding: 2px;padding-top: 2px;padding-right: 12px;padding-left: 12px">
@@ -76,105 +85,53 @@
 				</li>
 			</ul>
 			<div id="myTabContent" class="tab-content" >
-				<div class="tab-pane fade in active" id="yitijiao">
+				<div class="tab-pane fade in active" id="yitijiao">					
+					<%
+					//WorksBean wb=new WorksBean();
+					WorksDao wd1=new WorksImpl();
+					List<WorksBean> wbs1=new ArrayList<WorksBean>();
+					wbs1=wd1.querycreid("201526010307", 3);
+					if(wbs1.isEmpty()==false){
+					for(int i=0;i<wbs1.size();i++)
+					{
+						WorksBean wb=wbs1.get(i);
+						Video_imageDao vi=new Video_imageImpl();
+						Video_imageBean vib=new Video_imageBean();
+						String url=new ToStr().ToString(vi.get(wb.getVI_no()).getImage());
+						if(i%5==0){ 
+					%> 
+					<div class="block2">
+					<% }%>
+					<div class="elem1">
+						<div class="elemimage">
+							<a href="http://localhost:8088/MProject_keyan/Servlet/WorkServlet?action=upsavework&ide=work&tid=<%=wb.getTch_no() %>&alwid=<%=wb.getWrk_no() %>&stat=<%=wb.getState() %>" style="text-decoration: none"><img src="<%=url %>" alt="加载失败" class="image1" ></a>
+						</div>
+						<div class="elem1-2" style="margin-top: 0px">
+							<p><%=wb.getWrk_name() %></p>
+						</div>
+						<div class="overlay">
+							<a href="http://localhost:8088/MProject_keyan/Servlet/WorkServlet?action=upsavework&ide=work&tid=<%=wb.getTch_no() %>&alwid=<%=wb.getWrk_no() %>&stat=<%=wb.getState() %>" style="text-decoration: none" style="text-decoration: none"><div class="text"><%=wb.getIntro() %></div></a>
+						</div>
+					</div>
+					<%if(wbs1.size()<=10 && i==wbs1.size()-1){ %>
+					<div class="elem1">
+						<div class="elemimage">
+							<a href="http://localhost:8088/MProject_keyan/Servlet/WorkServlet?action=addnewwork&ide=work&tid=201526010307&state=0"><img src="picture/plus.png" alt="加载失败" class="image1" ></a>
+						</div> 
+					</div>					
+					<%
+					}
+					if(i%5==0){ 
+					%>
+					</div>
+					<%
+					}
+					}
+					}
+					%>
 					<div class="block2">
 					
-					<div class="elem1">
-						<div class="elemimage">
-							<a href="workedit/addwork.jsp" style="text-decoration: none"><img src="picture/成果1.jpg" alt="加载失败" class="image1" ></a>
-						</div>
-						<div class="elem1-2" style="margin-top: 0px">
-							<p>成果1的标题</p>
-						</div>
-						<div class="overlay">
-							<a href="workedit/addwork.jsp" style="text-decoration: none"><div class="text">成果1的介绍</div></a>
-						</div>
 					</div>
-					<div class="elem1">
-						<div class="elemimage">
-							<a href="workedit/addwork.jsp" style="text-decoration: none"><img src="picture/成果2.jpg" alt="加载失败" class="image1" ></a>
-						</div>
-						<div class="elem1-2" style="margin-top: 0px">
-							<p>成果2的标题</p>
-						</div>
-						<a href="workedit/addwork.jsp" style="text-decoration: none"><div class="overlay">
-							<div class="text">成果2的介绍</div>
-						</div></a>
-					</div>
-					<div class="elem1">
-						<div class="elemimage">
-							<a href="workedit/addwork.jsp" style="text-decoration: none"><img src="picture/成果3.jpg" alt="加载失败" class="image1" ></a>
-						</div>
-						<div class="elem1-2">
-							<p>成果3的标题</p>
-						</div>
-						<a href="workedit/addwork.jsp" style="text-decoration: none"><div class="overlay">
-							<div class="text">成果3的介绍</div>
-						</div></a>
-					</div>
-					<div class="elem1">
-						<div class="elemimage">
-							<a href="workedit/addwork.jsp" style="text-decoration: none"><img src="picture/成果4.jpg" alt="加载失败" class="image1" ></a>
-						</div>
-						<div class="elem1-2">
-							<p>成果4的标题</p>
-						</div>
-						<div class="overlay">
-							<a href="workedit/addwork.jsp" style="text-decoration: none"><div class="text">成果4的介绍</div></a>
-						</div>
-					</div>
-					<div class="elem1">
-						<div class="elemimage">
-							<a href="workedit/addwork.jsp" style="text-decoration: none"><img src="picture/成果5.jpg" alt="加载失败" class="image1" ></a>
-						</div>
-						<div class="elem1-2">
-							<p>成果5的标题</p>
-						</div>
-						<div class="overlay">
-							<a href="workedit/addwork.jsp" style="text-decoration: none"><div class="text">成果5的介绍</div></a>
-						</div>
-					</div>
-				</div>
-				<div class="block2">
-					<div class="elem1">
-						<div class="elemimage">
-							<a href="workedit/addwork.jsp" style="text-decoration: none"><img src="picture/成果6.jpg" alt="加载失败" class="image1" ></a>
-						</div>
-						<div class="elem1-2">
-							<p>成果3的标题</p>
-						</div>
-						<div class="overlay">
-							<a href="workedit/addwork.jsp" style="text-decoration: none"><div class="text">成果3的介绍</div></a>
-						</div>
-					</div>
-					<div class="elem1">
-						<div class="elemimage">
-							<a href="workedit/addwork.jsp" style="text-decoration: none"><img src="picture/成果7.jpg" alt="加载失败" class="image1" ></a>
-						</div>
-						<div class="elem1-2">
-							<p>成果3的标题</p>
-						</div>
-						<div class="overlay">
-							<a href="#成果审核" style="text-decoration: none"><div class="text">成果3的介绍</div></a>
-						</div>
-					</div>
-					<div class="elem1">
-						<div class="elemimage">
-							<a href="workedit/addwork.jsp" style="text-decoration: none"><img src="picture/成果8.jpg" alt="加载失败" class="image1" ></a>
-						</div>
-						<div class="elem1-2">
-							<p>成果3的标题</p>
-						</div>
-						<div class="overlay">
-							<a href="workedit/addwork.jsp" style="text-decoration: none"><div class="text">成果3的介绍</div></a>
-						</div>
-					</div>
-					<div class="elem1">
-						<div class="elemimage">
-							<a href="/workedit/addwork.jsp"><img src="picture/plus.png" alt="加载失败" class="image1" ></a>
-						</div>
-					</div>
-				</div>
 				<div class="block2-1">
 					<ul class="pagination">
 						<li><a href="#">首页</a></li>
@@ -188,98 +145,42 @@
 				</div>
 				
 			</div>
-				<div class="tab-pane fade" id="weitijiao">
+			
+			
+			<!--	 -->
+			<div class="tab-pane fade" id="weitijiao">
 					<div class="block2">
+					<%
+					//WorksBean wb=new WorksBean();
+					WorksDao wd=new WorksImpl();
+					List<WorksBean> wbs=new ArrayList<WorksBean>();
+					wbs=wd.querycreid("201526010307", 1);
+					if(wbs.isEmpty()==false){
+					for(int i=0;i<wbs.size();i++)
+					{
+						WorksBean wb=wbs.get(i);
+						Video_imageDao vi=new Video_imageImpl();
+						Video_imageBean vib=new Video_imageBean();
+						String url1=new ToStr().ToString(vi.get(wb.getVI_no()).getImage());
+					%> 
+					
 					<div class="elem1">
 						<div class="elemimage">
-							<a href="workedit/addwork.jsp" style="text-decoration: none"><img src="picture/成果1.jpg" alt="加载失败" class="image1" ></a>
+							<a href="http://localhost:8088/MProject_keyan/Servlet/WorkServlet?action=upsavework&ide=work&tid=<%=wb.getTch_no() %>&alwid=<%=wb.getWrk_no() %>&stat=<%=wb.getState() %>" style="text-decoration: none"><img src="<%=url1 %>" alt="加载失败" class="image1" ></a>
 						</div>
 						<div class="elem1-2" style="margin-top: 0px">
-							<p>成果1的标题</p>
+							<p><%=wb.getWrk_name() %></p>
 						</div>
-						<a href="workedit/addwork.jsp" style="text-decoration: none"><div class="overlay">
-							<div class="text">成果1的介绍</div>
-						</div></a>
+						<a href="http://localhost:8088/MProject_keyan/Servlet/WorkServlet?action=upsavework&ide=work&tid=<%=wb.getTch_no() %>&alwid=<%=wb.getWrk_no() %>&stat=<%=wb.getState() %>" style="text-decoration: none"><div class="overlay">
+							<div class="text" style="font-size: 15px;word-wrap: break-word;word-break:normal;padding:2px"><%=wb.getIntro() %></div>
+							</div>
+						</a>
 					</div>
-					<div class="elem1">
-						<div class="elemimage">
-							<a href="workedit/addwork.jsp" style="text-decoration: none"><img src="picture/成果2.jpg" alt="加载失败" class="image1" ></a>
-						</div>
-						<div class="elem1-2" style="margin-top: 0px">
-							<p>成果2的标题</p>
-						</div>
-						<div class="overlay">
-							<a href="workedit/addwork.jsp" style="text-decoration: none"><div class="text">成果2的介绍</div></a>
-						</div>
-					</div>
-					<div class="elem1">
-						<div class="elemimage">
-							<img src="picture/成果3.jpg" alt="加载失败" class="image1" >
-						</div>
-						<div class="elem1-2">
-							<p>成果3的标题</p>
-						</div>
-						<div class="overlay">
-							<div class="text">成果3的介绍</div>
-						</div>
-					</div>
-					<div class="elem1">
-						<div class="elemimage">
-							<img src="picture/成果4.jpg" alt="加载失败" class="image1" >
-						</div>
-						<div class="elem1-2">
-							<p>成果4的标题</p>
-						</div>
-						<div class="overlay">
-							<div class="text">成果4的介绍</div>
-						</div>
-					</div>
-					<div class="elem1">
-						<div class="elemimage">
-							<img src="picture/成果5.jpg" alt="加载失败" class="image1" >
-						</div>
-						<div class="elem1-2">
-							<p>成果5的标题</p>
-						</div>
-						<div class="overlay">
-							<div class="text">成果5的介绍</div>
-						</div>
-					</div>
-				</div>
-				<div class="block2">
-					<div class="elem1">
-						<div class="elemimage">
-							<img src="picture/成果6.jpg" alt="加载失败" class="image1" >
-						</div>
-						<div class="elem1-2">
-							<p>成果3的标题</p>
-						</div>
-						<div class="overlay">
-							<div class="text">成果3的介绍</div>
-						</div>
-					</div>
-					<div class="elem1">
-						<div class="elemimage">
-							<img src="picture/成果7.jpg" alt="加载失败" class="image1" >
-						</div>
-						<div class="elem1-2">
-							<p>成果3的标题</p>
-						</div>
-						<div class="overlay">
-							<div class="text">成果3的介绍</div>
-						</div>
-					</div>
-					<div class="elem1">
-						<div class="elemimage">
-							<img src="picture/成果8.jpg" alt="加载失败" class="image1" >
-						</div>
-						<div class="elem1-2">
-							<p>成果3的标题</p>
-						</div>
-						<div class="overlay">
-							<div class="text">成果3的介绍</div>
-						</div>
-					</div>
+					
+					<%
+					}
+					} 
+					%>
 				</div>
 				<div class="block2-1">
 					<ul class="pagination">

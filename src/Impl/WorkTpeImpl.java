@@ -2,8 +2,12 @@ package Impl;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
+import Bean.TeacherBean;
 import Bean.WorkTpeBean;
 import Dao.WorkTpeDao;
 import Util.Util;
@@ -64,6 +68,34 @@ public class WorkTpeImpl implements WorkTpeDao {
 			}finally{
 				util.closeConnection(conn);
 			}
+	}
+
+	@Override
+	public List<WorkTpeBean> query() {
+		// TODO Auto-generated method stub
+		Util util=new Util();
+		Connection conn=util.openConnection();
+		String sql="select * from WorkTpe";
+		List<WorkTpeBean> wtbs=new ArrayList<WorkTpeBean>();
+		try {
+			PreparedStatement ptmt=conn.prepareStatement(sql);
+			ResultSet rs=ptmt.executeQuery();
+			
+			WorkTpeBean wtb=null;
+			while(rs.next())
+			{
+				wtb=new WorkTpeBean();
+				wtb.setType_ID(rs.getString("Type_ID"));
+				wtb.setType_name(rs.getString("Type_name"));
+				wtbs.add(wtb);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally{
+			util.closeConnection(conn);
+		}
+		return wtbs;	
 	}
 
 }

@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=GB2312"
     pageEncoding="GB2312"%>
+<%@ page import="Bean.Video_imageBean" %>
+<%@ page import="Dao.Video_imageDao" %>
+<%@ page import="Impl.Video_imageImpl" %>
+<%@ page import="Util.ToStr" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -160,29 +164,65 @@
 			r.onload = function(e) {
 				document.getElementById('show').src = this.result;
 			};
+			p=document.getElementById('tishi');
+			p.innerHTML=null;
 		}
 		function nopreviewImg() {
 			document.getElementById('show').src ="";
 			
 		}
+		
+		function load()
+		{
+		<%
+		response.addHeader("P3P", "CP=CAO PSA OUR");
+		%>
+		}
+		
 	</script>
 </head>
-<body background-color="rgb(231, 244, 241)">
+<body background-color="rgb(231, 244, 241)" onload="load()">
 <div class="liukong">
 	<div class=cyl_codeUI>
 		<div id="cyl_choosePic">
 			<p class="cyl_titile">封面图片</p>
-			<div style="height:60px"></div>
+			<%
+				Video_imageBean vib1=new Video_imageBean();
+				String url=null;
+				Video_imageDao vid=new Video_imageImpl();
+				vib1=vid.get(Integer.parseInt(session.getAttribute("vid").toString()));
+				if(vib1.getImage()!=null){
+					url=new ToStr().ToString(vib1.getImage());
+				}
+				%>
 			   <form action="../LoadServlet?action=upload&ide=img" enctype="multipart/form-data" method="post">
-                请选择图片：<input id="myfile" name="myfile" type="file" onchange="previewImg(this)"/>
+			   <%
+			   if(url!=null)
+				{
+				   
+				%>
+				<p id="tishi">已选择文件<%=url %></p>
+                请选择图片：<input id="myfile" name="myfile" type="file" onchange="previewImg(this)" />
                 <br>
-                <button type="submit" class="btn" >提交</button>
-                <button type="reset" class="btn" onclick="nopreviewImg()">重置</button>
+                <!-- <button type="submit" class="btn" >提交</button> -->
+                <div id="cyl_daiding" style="margin-top:30px">
+                <img src="<%=url %>" id="show" style="width:100%;height:100%"/>
+                </div>
+                <%
+				}else{
+					%>
+					  请选择图片：<input id="myfile" name="myfile" type="file" onchange="previewImg(this)"  />
                 <br>
+                <!-- <button type="submit" class="btn" >提交</button> -->
                 <div id="cyl_daiding" style="margin-top:30px">
                 <img src="" id="show" style="width:100%;height:100%"/>
                 </div>
+				<% 
+				}
+                %>
+               <div style="height:50px"></div>
                 <div style="text-align:right;padding-top:0px;margin-top:0px">
+                 <button type="reset" class="btn" onclick="nopreviewImg()">重置</button>
 				<a href="../LoadServlet?action=upload&ide=img"><input type="submit" value="下一步"></input></a>
 				</div> 
             </form>

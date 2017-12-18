@@ -7,7 +7,7 @@ public interface Video_imageDao {
 	public void addimg(String url,int id);
 	public void addvideo(String url,int id);
 	public void deletevi(int VI_no);
-	public void updatevi(Video_imageBean vi);
-	public Video_imageBean get(int VI_no);
+	public void updatevi(Video_imageBean vi,Video_imageBean vi1);
+	public Video_imageBean get(int VIno);
 	
 }

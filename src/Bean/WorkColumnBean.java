@@ -2,7 +2,7 @@ package Bean;
 
 public class WorkColumnBean {
 	int Col_no;
-	String Wrk_no;
+	int Wrk_no;
 	String Col_name;
 	String Col_content;
 	String Tch_no;
@@ -32,11 +32,11 @@ public class WorkColumnBean {
 		Col_no = col_no;
 	}
 
-	public String getWrk_no() {
+	public int getWrk_no() {
 		return Wrk_no;
 	}
 
-	public void setWrk_no(String wrk_no) {
+	public void setWrk_no(int wrk_no) {
 		Wrk_no = wrk_no;
 	}
 

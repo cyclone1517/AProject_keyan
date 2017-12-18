@@ -16,11 +16,11 @@ public class delXML {
 		SAXReader reader = new SAXReader();
 		try {
 		Document document;
-		document = reader.read(new File("WorkColumn.xml"));
+		document = reader.read(new File("D:/eclipseworkplace/AProject_keyan/WorkColumn.xml"));
 		Node node= document.selectSingleNode("//teacher[@tid="+teaid+"]");
 		node.getParent().remove(node);
 		//指定文件输出的位置
-        FileOutputStream out =new FileOutputStream("WorkColumn.xml");
+        FileOutputStream out =new FileOutputStream("D:/eclipseworkplace/AProject_keyan/WorkColumn.xml");
         // 指定文本的写出的格式：
         OutputFormat format=OutputFormat.createPrettyPrint();   //漂亮格式：有空格换行
         format.setEncoding("UTF-8");
@@ -43,11 +43,11 @@ public class delXML {
 		SAXReader reader = new SAXReader();
 		try {
 		Document document;
-		document = reader.read(new File("WorkColumn.xml"));
+		document = reader.read(new File("D:/eclipseworkplace/AProject_keyan/WorkColumn.xml"));
 		Node node= document.selectSingleNode("//teacher[@tid="+teaid+"]/work[@wid="+worid+" and @state="+state+"]");
 		node.getParent().remove(node);
 		//指定文件输出的位置
-        FileOutputStream out =new FileOutputStream("WorkColumn.xml");
+        FileOutputStream out =new FileOutputStream("D:/eclipseworkplace/AProject_keyan/WorkColumn.xml");
         // 指定文本的写出的格式：
         OutputFormat format=OutputFormat.createPrettyPrint();   //漂亮格式：有空格换行
         format.setEncoding("UTF-8");
@@ -70,11 +70,11 @@ public class delXML {
 		SAXReader reader = new SAXReader();
 		try {
 		Document document;
-		document = reader.read(new File("WorkColumn.xml"));
+		document = reader.read(new File("D:/eclipseworkplace/AProject_keyan/WorkColumn.xml"));
 		Node node= document.selectSingleNode("//teacher[@tid="+teaid+"]/work[@wid="+worid+" and @state="+state+"]/column[@cid="+colid+"]");
 		node.getParent().remove(node);
 		//指定文件输出的位置
-        FileOutputStream out =new FileOutputStream("WorkColumn.xml");
+        FileOutputStream out =new FileOutputStream("D:/eclipseworkplace/AProject_keyan/WorkColumn.xml");
         // 指定文本的写出的格式：
         OutputFormat format=OutputFormat.createPrettyPrint();   //漂亮格式：有空格换行
         format.setEncoding("UTF-8");
@@ -97,11 +97,11 @@ public class delXML {
 		SAXReader reader = new SAXReader();
 		try {
 		Document document;
-		document = reader.read(new File("WorkColumn.xml"));
+		document = reader.read(new File("D:/eclipseworkplace/AProject_keyan/WorkColumn.xml"));
 		Node node= document.selectSingleNode("//teacher[@tid="+teaid+"]/work[@wid="+worid+" and @state="+state+"]/column[@cid="+colid+"]");
 		node.setText("");
 		//指定文件输出的位置
-        FileOutputStream out =new FileOutputStream("WorkColumn.xml");
+        FileOutputStream out =new FileOutputStream("D:/eclipseworkplace/AProject_keyan/WorkColumn.xml");
         // 指定文本的写出的格式：
         OutputFormat format=OutputFormat.createPrettyPrint();   //漂亮格式：有空格换行
         format.setEncoding("UTF-8");

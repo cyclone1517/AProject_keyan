@@ -3,7 +3,7 @@ package Bean;
 import java.util.Date;
 
 public class WorkCheckBean {
-	String Wrk_no;// 成果编号
+	int Wrk_no;// 成果编号
 	String Tch_no;
 	int state; /* 创建，待审核，已审核，禁用 */
 	String Mng_no;// 管理员编号
@@ -25,11 +25,11 @@ public class WorkCheckBean {
 		this.state = state;
 	}
 
-	public String getWrk_no() {
+	public int getWrk_no() {
 		return Wrk_no;
 	}
 
-	public void setWrk_no(String wrk_no) {
+	public void setWrk_no(int wrk_no) {
 		Wrk_no = wrk_no;
 	}
 

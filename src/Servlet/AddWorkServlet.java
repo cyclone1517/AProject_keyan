@@ -55,7 +55,7 @@ public class AddWorkServlet extends HttpServlet {
 		String intro=request.getParameter("intro");
 		WorksBean work=new WorksBean();
 		WorksDao wd=new WorksImpl();
-		work.setWrk_no(workno);
+		work.setWrk_no(Integer.getInteger(workno));
 		work.setWrk_name(workname);
 		work.setWlabel(wlabel);
 		work.setType_ID(type);

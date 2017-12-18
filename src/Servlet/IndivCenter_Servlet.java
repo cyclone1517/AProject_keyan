@@ -24,8 +24,15 @@ public class IndivCenter_Servlet extends HttpServlet{
 	}
 	
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		resp.setContentType("text/html;charset=utf-8");
+		resp.setContentType("text/html;charset=urf-8");
 		String action=req.getParameter("action");
+
+		if(action.equals("submit")){
+			//syslist(req,resp);
+		}
+		else if(action.equals("get")){
+			
+
 		if(req.getParameter("action")!=null)
 		{
 			this.action = req.getParameter("action");
@@ -35,6 +42,8 @@ public class IndivCenter_Servlet extends HttpServlet{
 			}else if(action.equals("psdChange")){
 				changePassword(req,resp);
 			}
+
+		}
 		}
 		/*else if(action.equals("query")){
 			String type1 = new String(req.getParameter("type1").getBytes("iso-8859-1"), "utf-8");
@@ -64,31 +73,26 @@ public class IndivCenter_Servlet extends HttpServlet{
 		String username = (String)req.getSession().getAttribute("username");
 		mbean = mdao.get(username);
 		
-		String oldpwd = req.getParameter("oldpwd");
-		String newpwd1 = req.getParameter("newpwd1");
-		String newpwd2 = req.getParameter("newpwd2");
-		System.out.println(oldpwd + ", " + newpwd1 + ", " + newpwd2);
+		String oldpsd = req.getParameter("oldpsd");
+		String newpsd1 = req.getParameter("newpsd1");
+		String newpsd2 = req.getParameter("newpsd2");
 		
 		PrintWriter out=resp.getWriter();
-		//in java '==' just means compare the index
-		if(!mbean.getPassword().equals(oldpwd)){
-			out.print("<script language='javascript'>alert('原密码输入错误!');"
-					+ "window.location.href='subIndivCenter/PswdChange.jsp';</script>"); 
-		}else if(newpwd1==null || newpwd1==""){
-			out.print("<script language='javascript'>alert('请输入新密码!');"
-					+ "window.location.href='subIndivCenter/PswdChange.jsp';</script>"); 
-		}else if(newpwd2==null || newpwd1==""){
-			out.print("<script language='javascript'>alert('请重复输入新密码!');"
-					+ "window.location.href='subIndivCenter/PswdChange.jsp';</script>"); 
-		}else if(!newpwd1.equals(newpwd2)){
-			out.print("<script language='javascript'>alert('两次输入的密码不一致，请重新输入!');"
-					+ "window.location.href='subIndivCenter/PswdChange.jsp';</script>"); 
+		if(mbean.getPassword()!=oldpsd){
+			//out.print("<script language='javascript'>alert('原密码输入错误!');window.location.href='Login.jsp';</script>"); 
+			out.print("<script language='javascript'>alert('原密码输入错误!');</script>"); 
+			req.getRequestDispatcher("PswdChange.jsp").forward(req, resp);
+		}else if(newpsd1!=newpsd2){
+			out.print("<script language='javascript'>alert('重新输入的密码不一致!');</script>"); 
+			req.getRequestDispatcher("PswdChange.jsp").forward(req, resp);
 		}else{
-			mbean.setPassword(newpwd2);
+			mbean.setPassword(newpsd2);
 			mdao.updateManager(mbean);
-			out.print("<script language='javascript'>alert('您已成功修改密码!');"
-					+ "window.location.href='subIndivCenter/PswdChange.jsp';</script>"); 
-		}	
+			out.print("<script language='javascript'>alert('您已成功修改密码!');</script>"); 
+			req.getRequestDispatcher("PswdChange.jsp").forward(req, resp);
+		}
+		
+		
 	}
 	
 	protected void tchqueryno(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
