@@ -167,17 +167,17 @@
 			<table>
 				<tr>
 					<td width=90px>原密码</td>
-					<td><input type="password" name="oldpwd" id="cyl_emain" style="width:300px"></td>
+					<td><input type="password" name="oldpsd" id="cyl_emain" style="width:300px"></td>
 				</tr>
 				<tr><td><br/></td></tr>
 				<tr>
 					<td>新密码</td>
-					<td><input type="password" name="newpwd1" id="cyl_emain" style="width:300px"></td>
+					<td><input type="password" name="newpsd1" id="cyl_emain" style="width:300px"></td>
 				</tr>
 				<tr><td><br/></td></tr>
 				<tr>
 					<td>确认密码</td>
-					<td><input type="password" name="newpwd2" id="cyl_emain" style="width:300px"></td>
+					<td><input type="password" name="newpsd2" id="cyl_emain" style="width:300px"></td>
 				</tr>
 				<tr><td><br/></td></tr>
 			</table>

@@ -24,36 +24,23 @@ public class IndivCenter_Servlet extends HttpServlet{
 	}
 	
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		resp.setContentType("text/html;charset=urf-8");
-		String action=req.getParameter("action");
-
-		if(action.equals("submit")){
-			//syslist(req,resp);
-		}
-		else if(action.equals("get")){
-			
-
+		resp.setContentType("text/html;charset=utf-8");
+		action=req.getParameter("action");
+		System.out.println(action);
+		
 		if(req.getParameter("action")!=null)
 		{
 			this.action = req.getParameter("action");
 			if(action.equals("submit"))
 			{
-				/*changeUserInfo(req,resp);*/
+				//do nothing
 			}else if(action.equals("psdChange")){
+				System.out.println("entering psdChange...");
 				changePassword(req,resp);
 			}
 
 		}
-		}
-		/*else if(action.equals("query")){
-			String type1 = new String(req.getParameter("type1").getBytes("iso-8859-1"), "utf-8");
-			String type2 = new String(req.getParameter("type2").getBytes("iso-8859-1"), "utf-8");
-			String keywords = new String(req.getParameter("keywords").getBytes("iso-8859-1"), "utf-8");
-			HttpSession session=req.getSession();
-			session.setAttribute("type1", type1);
-			session.setAttribute("type2", type2);
-			session.setAttribute("keywords", keywords);
-		}*/
+		
 	}
 	
 	/*这个函数没有用上*/
@@ -68,6 +55,7 @@ public class IndivCenter_Servlet extends HttpServlet{
 	}
 	
 	protected void changePassword(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		
 		ManagerDao mdao=new ManagerImpl();
 		ManagerBean mbean = new ManagerBean();
 		String username = (String)req.getSession().getAttribute("username");
@@ -78,18 +66,19 @@ public class IndivCenter_Servlet extends HttpServlet{
 		String newpsd2 = req.getParameter("newpsd2");
 		
 		PrintWriter out=resp.getWriter();
-		if(mbean.getPassword()!=oldpsd){
-			//out.print("<script language='javascript'>alert('原密码输入错误!');window.location.href='Login.jsp';</script>"); 
-			out.print("<script language='javascript'>alert('原密码输入错误!');</script>"); 
-			req.getRequestDispatcher("PswdChange.jsp").forward(req, resp);
-		}else if(newpsd1!=newpsd2){
-			out.print("<script language='javascript'>alert('重新输入的密码不一致!');</script>"); 
-			req.getRequestDispatcher("PswdChange.jsp").forward(req, resp);
+		
+		if(!mbean.getPassword().equals(oldpsd)){
+			out.print("<script language='javascript'>alert('原密码输入错误!');window.location.href='subIndivCenter/PswdChange.jsp';</script>"); 
+			//out.print("<script language='javascript'>alert('原密码输入错误!');</script>"); 
+			//req.getRequestDispatcher("PswdChange.jsp").forward(req, resp);
+		}else if(newpsd1.length()<6){
+			out.print("<script language='javascript'>alert('请输入6位以上的新密码!');window.location.href='subIndivCenter/PswdChange.jsp';</script>"); 
+		}else if(!newpsd1.equals(newpsd2)){
+			out.print("<script language='javascript'>alert('确认密码和新密码不一致!');window.location.href='subIndivCenter/PswdChange.jsp';</script>"); 
 		}else{
 			mbean.setPassword(newpsd2);
 			mdao.updateManager(mbean);
-			out.print("<script language='javascript'>alert('您已成功修改密码!');</script>"); 
-			req.getRequestDispatcher("PswdChange.jsp").forward(req, resp);
+			out.print("<script language='javascript'>alert('您已成功修改密码!');window.location.href='subIndivCenter/PswdChange.jsp';</script>"); 
 		}
 		
 		
