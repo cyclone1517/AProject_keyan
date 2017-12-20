@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="Bean.ManagerBean, Dao.ManagerDao, Impl.ManagerImpl" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -153,7 +154,7 @@
 		}
 		#cyl_basicInfo{
 			width:470px;
-			height:100px;
+			height:80px;
 			padding:35px 20px 45px 20px;
 			box-shadow: 2px 3px 10px #8BC34A;
 			background-color:rgb(203, 247, 176);
@@ -166,28 +167,43 @@
 	<div class=cyl_codeUI>
 		<p class="cyl_titile">邮箱绑定</p>
 		<div id="cyl_basicInfo">
-		
+		<%
+			ManagerBean mbean = new ManagerBean();
+			String username = (String)request.getSession().getAttribute("username");
+			if(username!=null){
+				ManagerDao mdao = new ManagerImpl();
+				mbean = mdao.get(username);	
+			}
+		%>
+		<form method = "post" action="/AProject_keyan/IndivCenter_Servlet?action=emailSending">
 			<table>
 				<tr>
 					<td width=70px>邮&ensp;&ensp;箱</td>
-					<td><input type="text" name="emain" id="cyl_emain" style="width:280px"></td>
-					<td><input type="button" value="发送验证码"></td>
+					<td><input type="text" name="receiveMail" id="cyl_emain" value="<%=mbean.getEmail()%>" style="width:280px"></td>
+					<td><input type="submit" value="发送邮件"></td>
 				</tr>
 				<tr><td><br/></td></tr>
 				<tr>
-					<td>验证码</td>
-					<td><input type="text" name="emain" id="cyl_emain" style="width:280px"></td>
+			</table>
+		</form>
+		
+		<form method = "post" action="/AProject_keyan/IndivCenter_Servlet?action=emailSaving">
+			<table>
+				<tr>
+					<td width=70px>验证码</td>
+					<td><input type="text" name="validation" id="cyl_emain" style="width:280px"></td>
 				</tr>
 				<tr><td><br/></td></tr>
 			</table>
+			<br/><br/><br/><br/>
+			<div style="margin-left:450px">
+				<input type="submit" value="提交"/>
+			</div>
+		
+		</form>
 		</div>
 		
-		<br/><br/><br/>
 		
-		
-		<div style="margin-left:450px">
-			<input type="submit"/>
-		</div>
 	</div>
 </div>
 </body>

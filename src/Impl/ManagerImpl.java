@@ -73,7 +73,7 @@ public class ManagerImpl implements ManagerDao {
 	@Override
 	public void updateManager(ManagerBean manager) {
 		// TODO Auto-generated method stub
-		String sql ="update Manager set dpmt=?, password=? where Mng_no=?";
+		String sql ="update Manager set dpmt=?, password=?, email=? where Mng_no=?";
 		Util util=new Util();
 		Connection conn=util.openConnection();
 		try {
@@ -81,7 +81,8 @@ public class ManagerImpl implements ManagerDao {
 			//ptmt.setString(1, manager.getMng_name());
 			ptmt.setString(1,manager.getDpmt());
 			ptmt.setString(2,manager.getPassword());
-			ptmt.setString(3, manager.getMng_no());
+			ptmt.setString(3, manager.getEmail());
+			ptmt.setString(4, manager.getMng_no());
 			ptmt.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
